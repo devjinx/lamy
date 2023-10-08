@@ -4,7 +4,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Store from '../views/Store.vue'
 import Topup from '../views/Topup.vue'
-
+import PageNotFound from '../views/PageNotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,8 +33,12 @@ const router = createRouter({
       path: '/store',
       name: 'store',
       component: Store
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: PageNotFound
     }
-
   ]
 })
 
