@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <p>&copy; {{ currentYear }} Lamy All rights reserved.</p>
+      <p class="centered-paragraph">&copy; {{ currentYear }} Lamy All rights reserved.</p>
     </div>
   </footer>
 </template>
@@ -19,19 +19,19 @@ export default {
 
 <style scoped>
 .footer {
-  background-color: #0ea5e9;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-p {
-  margin: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 45px;
   font-size: 14px;
+  background-color: #0ea5e9;
+  color: #ffffff;
+  text-align: center;
+}
+
+.centered-paragraph {
+  text-align: center; 
 }
 </style>
