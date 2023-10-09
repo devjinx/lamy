@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <p>&copy; {{ currentYear }} Your Company Name. All rights reserved.</p>
+      <p>&copy; {{ currentYear }} Lamy All rights reserved.</p>
     </div>
   </footer>
 </template>
@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .footer {
-  background-color: #333;
+  background-color: #0ea5e9;
   color: #fff;
   text-align: center;
   padding: 10px 0;

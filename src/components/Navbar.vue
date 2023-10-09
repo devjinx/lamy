@@ -1,63 +1,86 @@
 <template>
-  <nav class="navbar">
-    <div class="container">
-      <div class="logo">
-        <router-link to="/">
-          <img src="../assets/Lamy_logo_png.png" alt="Your Logo" width="32" height="32" />
-        </router-link>
-      </div>
-      <ul class="nav-links">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/Store">Store</router-link></li>
-        <li><router-link to="/Topup">TopUp</router-link></li>
-        <li><router-link to="/Register">Register</router-link></li>
-        <li><router-link to="/Login">Login</router-link></li>
-      </ul>
+  <div class="navbar">
+    <div class="navbar-lamy">
+        <RouterLink to="/"><a>Lamy</a></RouterLink>
     </div>
-  </nav>
+    <div class="navbar-left">
+        <RouterLink to="/"><a>Home</a></RouterLink>
+        <RouterLink to="/store"><a>Store</a></RouterLink>
+        <RouterLink to="/topup"><a>TopUP</a></RouterLink>
+    </div>
+    <div class="navbar-right">
+        <RouterLink to="/login"><a>SignIN</a></RouterLink>
+        <RouterLink to="/register"><a>SignUP</a></RouterLink>
+    </div>
+</div>
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
-  name: 'Navbar',
+    name: 'Navbar',
+    components: { RouterLink }
 };
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body, ul {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the navigation bar */
 .navbar {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
+    background-color: #0ea5e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: center; /* postion error */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; /* Ensure it's above other content */
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+.navbar a {
+    color: white;
+    text-align: center;
+    padding: 18px 18px;
+    text-decoration: none;
 }
 
-.logo {
-  font-size: 24px;
+/* Style the navigation bar links on hover */
+.navbar a:hover {
+    background-color: #0edce9;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+/* Update the font size of .navbar-lamy */
+.navbar-lamy {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 15px;
 }
 
-.nav-links li {
-  font-size: 18px;
+.navbar-left {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    float: left;
 }
 
-.nav-links li a {
-  text-decoration: none;
-  color: #fff;
-}
-
-.nav-links li a:hover {
-  text-decoration: underline;
+.navbar-right {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    float: right;
+    margin-left: 1000px; /* This may need adjustment based on your layout */
 }
 </style>
