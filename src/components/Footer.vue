@@ -18,6 +18,7 @@ export default {
 </script>
 
 <style scoped>
+
 .footer {
   position: fixed;
   left: 0;
@@ -29,7 +30,12 @@ export default {
   background-color: #0ea5e9;
   color: #ffffff;
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
+  p{
+  font-family: 'Roboto', sans-serif;
+
+  }
 
 .centered-paragraph {
   text-align: center; 

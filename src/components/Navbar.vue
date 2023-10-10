@@ -39,6 +39,7 @@
   }
   
   .navbar a {
+    font-family: 'Roboto', sans-serif;
     color: white;
     text-align: center;
     padding: 18px 18px;
@@ -47,11 +48,13 @@
   
   /* Style the navigation bar links on hover */
   .navbar a:hover {
+    font-family: 'Roboto', sans-serif;
     background-color: #0edce9;
   }
   
   /* Update the font size of .navbar-lamy */
   .navbar-lamy {
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
@@ -61,14 +64,16 @@
   }
   
   .navbar-left {
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: -600px;
+    margin-left: -550px;
   }
   
   .navbar-right {
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     display: flex;
     align-items: center;
