@@ -1,33 +1,31 @@
 <template>
-    <h1> a</h1>
-    <div class="navbar">
-      <div class="navbar-lamy">
-        <RouterLink to="/"><a>Lamy</a></RouterLink>
-      </div>
-      <div class="navbar-left">
-        <RouterLink to="/"><a>Home</a></RouterLink>
-        <RouterLink to="/store"><a>Store</a></RouterLink>
-        <RouterLink to="/topup"><a>TopUP</a></RouterLink>
-      </div>
-      <div class="navbar-right">
-        <RouterLink to="/login"><a>SignIN</a></RouterLink>
-        <RouterLink to="/register"><a>SignUP</a></RouterLink>
-      </div>
+  <h1> a</h1>
+  <div class="navbar">
+    <div class="navbar-lamy">
+      <RouterLink to="/"><a>Lamy</a></RouterLink>
+      <RouterLink to="/"><a>Home</a></RouterLink>
+      <RouterLink to="/store"><a>Store</a></RouterLink>
+      <RouterLink to="/topup"><a>Topup</a></RouterLink>
     </div>
-  </template>
-  
-  <style scoped>
+    <div class="navbar-right">
+      <RouterLink to="/login"><a>Sign in</a></RouterLink>
+      <RouterLink to="/register"><a>Sign up</a></RouterLink>
+    </div>
+  </div>
+</template>
+
+<style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-  
+
   body, ul {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
   }
-  
+
   /* Center the navigation bar */
   .navbar {
-    background-color: #0ea5e9;
+    background: linear-gradient(to top, #0ea5e9, #65C2F5);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,47 +35,31 @@
     right: 0;
     z-index: 999;
   }
-  
+
   .navbar a {
-    font-family: 'Roboto', sans-serif;
     color: white;
     text-align: center;
     padding: 18px 18px;
     text-decoration: none;
   }
-  
-  /* Style the navigation bar links on hover */
-  .navbar a:hover {
-    font-family: 'Roboto', sans-serif;
-    background-color: #0edce9;
-  }
-  
+
   /* Update the font size of .navbar-lamy */
   .navbar-lamy {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 300px;
-    margin-right : 100px
+    margin: 0 auto; /* Center horizontally within the screen */
   }
-  
-  .navbar-left {
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: -550px;
-  }
-  
+
+  /* Center .navbar-right horizontally */
   .navbar-right {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-left: 100px;
-    margin-right : 300px
+    margin: 0 auto; /* Center horizontally within the screen */
   }
-  </style>
+</style>

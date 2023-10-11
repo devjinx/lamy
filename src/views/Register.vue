@@ -1,16 +1,20 @@
 <template>
   <form class="register-form">
-    <h1>Register</h1>
+    <center>
+      <h1>Register</h1>
+    </center>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required /><br /><br />
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required /><br /><br />
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" name="confirm_password" required /><br /><br />
-    <div class="form-buttons">
+    <center>
+      <div class="form-buttons">
       <input type="submit" value="Register" class="register-button" />
       <router-link to="/login" class="back-to-login-button">Back to Login</router-link>
     </div>
+    </center>
   </form>
 </template>
 

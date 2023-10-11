@@ -1,13 +1,17 @@
 <template>
   <form class="login-form">
-    <h1>Login</h1>
+    <center>
+      <h1>Login</h1>
+    </center>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required /><br /><br />
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required /><br /><br />
     <div class="form-buttons">
+      <center>
       <input type="submit" value="Login" class="login-button" @click="login" />
       <router-link to="/register" class="back-to-register-button">Register ?</router-link>
+      </center>
     </div>
   </form>
 </template>

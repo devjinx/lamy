@@ -1,9 +1,12 @@
 <template>
-  <footer class="footer">
+  <center>
+    <footer class="footer">
     <div class="container">
       <p class="centered-paragraph">&copy; {{ currentYear }} Lamy All rights reserved.</p>
     </div>
   </footer>
+  </center>
+
 </template>
 
 <script>
@@ -20,6 +23,7 @@ export default {
 <style scoped>
 
 .footer {
+  font-family: 'Kanit', sans-serif;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -27,14 +31,13 @@ export default {
   height: 60px;
   line-height: 45px;
   font-size: 14px;
-  background-color: #0ea5e9;
+  background: linear-gradient(to bottom, #0ea5e9, #65C2F5);
   color: #ffffff;
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
   p{
-  font-family: 'Roboto', sans-serif;
-
+    font-family: 'Kanit', sans-serif;
   }
 
 .centered-paragraph {
