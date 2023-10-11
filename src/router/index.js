@@ -15,40 +15,28 @@ const router = createRouter({
       name: 'home',
       components: {
         default: HomeView,
-        navbar: Navbar, 
+        navbar: Navbar,
       },
     },
     {
       path: '/register',
       name: 'register',
-      components: {
-        default: Register,
-        navbar: Navbar, 
-      },
+      component: Register,
     },
     {
       path: '/login',
       name: 'login',
-      components: {
-        default: Login,
-        navbar: Navbar, 
-      },
+      component: Login,
     },
     {
       path: '/topup',
       name: 'topup',
-      components: {
-        default: Topup,
-        navbar: Navbar, 
-      },
+      component: Topup,
     },
     {
       path: '/store',
       name: 'store',
-      components: {
-        default: Store,
-        navbar: Navbar, 
-      },
+      component: Store,
     },
     {
       path: '/:pathMatch(.*)*',

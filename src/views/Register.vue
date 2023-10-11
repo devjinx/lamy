@@ -1,20 +1,20 @@
 <template>
-  <form class="register-form">
-    <center>
+  <form class="register-form" @submit.prevent="registerUser">
+    <div class="centered">      
       <h1>Register</h1>
-    </center>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required /><br /><br />
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required /><br /><br />
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" id="confirm_password" name="confirm_password" required /><br /><br />
-    <center>
-      <div class="form-buttons">
-      <input type="submit" value="Register" class="register-button" />
-      <router-link to="/login" class="back-to-login-button">Back to Login</router-link>
     </div>
-    </center>
+    <label for="username">Username:</label>
+    <input type="text" id="username" v-model="username" name="username" required /><br /><br />
+    <label for="password">Password:</label>
+    <input type="password" id="password" v-model="password" name="password" required /><br /><br />
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" required /><br /><br />
+    <div class="centered">      
+      <div class="form-buttons">
+        <input type="submit" value="Register" class="register-button" />
+        <router-link to="/login" class="back-to-login-button">Back to Login</router-link>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -24,26 +24,35 @@ export default {
     return {
       username: '',
       password: '',
+      confirmPassword: '', 
     };
   },
   methods: {
-    login() {
-      // Simplified example: Implement actual authentication logic here
-      alert(`Logging in with username: ${this.username} and password: ${this.password}`);
-    },
-    goToLogin() {
-      // Redirect or navigate to your login page here
-      // For example, you can use Vue Router for navigation
-      // router.push('/login'); // Assuming you have set up Vue Router
+    registerUser() {
+      if (this.password !== this.confirmPassword) {
+        // Handle password mismatch (show an error message or alert)
+        console.error('Password and confirm password do not match');
+        return;
+      }
+
+      const userData = {
+        username: this.username,
+        password: this.password,
+        // Add other registration data as needed
+      };
+
+      // Call your API registration function here (e.g., this.$userService.signUp(userData))
+      // Handle the API response and errors as appropriate
     },
   },
 };
 </script>
 
+
 <style scoped>
 /* Global styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Kanit', sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -52,11 +61,13 @@ body {
 
 /* Style the form container */
 h1 {
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   margin: 20px 0;
 }
 
 .register-form {
+  font-family: 'Kanit', sans-serif;
   background-color: #ffffff;
   max-width: 400px;
   margin: 0 auto;
@@ -72,6 +83,7 @@ h1 {
 
 /* Style the form labels and input fields */
 label {
+  font-family: 'Kanit', sans-serif;
   display: block;
   font-weight: bold;
   margin-bottom: 8px;
@@ -89,7 +101,8 @@ input[type="password"] {
 
 /* Style the submit button */
 input[type="submit"] {
-  margin-left: 20px; /* Add spacing between buttons */
+  font-family: 'Kanit', sans-serif;
+  margin-left: 20px; 
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
@@ -104,14 +117,19 @@ input[type="submit"]:hover {
 }
 
 .back-to-login-button {
-  background-color: #007bff;
-  color: #fff;
+  font-family: 'Kanit', sans-serif;
+  margin-left: 20px; 
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 18px;
-  margin-left: 20px; /* Add spacing between buttons */
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none; 
+}
+.centered {
+  text-align: center;
 }
 
 </style>

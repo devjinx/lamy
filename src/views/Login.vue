@@ -1,18 +1,20 @@
 <template>
   <form class="login-form">
-    <center>
+    <div class="centered">
       <h1>Login</h1>
-    </center>
+    </div>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required /><br /><br />
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required /><br /><br />
-    <div class="form-buttons">
-      <center>
+    <div class="centered">
+      <div class="form-buttons">
       <input type="submit" value="Login" class="login-button" @click="login" />
       <router-link to="/register" class="back-to-register-button">Register ?</router-link>
-      </center>
     </div>
+    </div>
+
+
   </form>
 </template>
 
@@ -36,7 +38,7 @@ export default {
 <style scoped>
 /* Global styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Kanit', sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -45,6 +47,7 @@ body {
 
 /* Style the form container */
 .login-form {
+  font-family: 'Kanit', sans-serif;
   background-color: #ffffff;
   max-width: 400px;
   margin: 0 auto;
@@ -60,6 +63,7 @@ body {
 
 /* Style the form labels and input fields */
 label {
+  font-family: 'Kanit', sans-serif;
   display: block;
   font-weight: bold;
   margin-bottom: 8px;
@@ -67,6 +71,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
+  font-family: 'Kanit', sans-serif;
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -77,11 +82,13 @@ input[type="password"] {
 
 /* Style the form buttons */
 .form-buttons {
+  font-family: 'Kanit', sans-serif;
   text-align: center;
 }
 
 .login-button,
 .back-to-register-button {
+  font-family: 'Kanit', sans-serif;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -91,6 +98,7 @@ input[type="password"] {
 
 .login-button {
   background-color: #007bff;
+  font-family: 'Kanit', sans-serif;
   color: #fff;
   margin-right: 20px;
 }
@@ -100,13 +108,24 @@ input[type="password"] {
 }
 
 .back-to-register-button {
+  font-family: 'Kanit', sans-serif;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
   background-color: #007bff;
   color: #fff;
+  text-decoration: none; 
   transition: background-color 0.3s;
 }
 
 .back-to-register-button:hover {
   background-color: #0056b3;
+}
+
+.centered {
+  text-align: center;
 }
 
 </style>

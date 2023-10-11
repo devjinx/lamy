@@ -1,13 +1,11 @@
 <template>
-  <center>
-    <footer class="footer">
+  <footer class="footer">
     <div class="container">
       <p class="centered-paragraph">&copy; {{ currentYear }} Lamy All rights reserved.</p>
     </div>
   </footer>
-  </center>
-
 </template>
+
 
 <script>
 export default {
@@ -21,7 +19,6 @@ export default {
 </script>
 
 <style scoped>
-
 .footer {
   font-family: 'Kanit', sans-serif;
   position: fixed;
@@ -36,11 +33,9 @@ export default {
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
-  p{
-    font-family: 'Kanit', sans-serif;
-  }
 
 .centered-paragraph {
-  text-align: center; 
+  text-align: center;
+  font-family: 'Kanit', sans-serif;
 }
 </style>
