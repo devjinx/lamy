@@ -1,27 +1,17 @@
-<template>
-  <div>
-    <h1>{{ message }}</h1>
-  </div>
-</template>
-
-<script>
 const express = require('express');
 const app = express();
 const port = 3000;
 
+// Middleware to parse JSON request bodies
 app.use(express.json());
 
-// Get the directory of the current script file
-const currentDirectory = __dirname;
-
-console.log('Directory of the current script file:', currentDirectory);
-
 app.post('/auth/sign_up', (req, res) => {
-  // Simulate a response for demonstration purposes
+  // In this example, you would handle the request and send a response.
+  // You might register the user and create a response object accordingly.
   const responseData = {
     success: true,
     message: 'User registration successful',
-    data: { userId: 123 }
+    // You can include additional data if needed
   };
 
   // Log the response data
@@ -34,5 +24,3 @@ app.post('/auth/sign_up', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-</script>

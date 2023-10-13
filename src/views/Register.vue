@@ -19,6 +19,9 @@
 </template>
 
 <script>
+// Import your signUp function from the apiService
+import { signUp } from '../service/apiService.js';
+
 export default {
   data() {
     return {
@@ -28,7 +31,7 @@ export default {
     };
   },
   methods: {
-    registerUser() {
+    async registerUser() {
       if (this.password !== this.confirmPassword) {
         // Handle password mismatch (show an error message or alert)
         console.error('Password and confirm password do not match');
@@ -41,13 +44,23 @@ export default {
         // Add other registration data as needed
       };
 
-      // Call your API registration function here (e.g., this.$userService.signUp(userData))
-      // Handle the API response and errors as appropriate
+      try {
+        // Call the signUp function from the API service
+        const response = await signUp(userData);
+
+        // Handle the API response here, for example, show a success message or redirect to the login page
+        console.log('Registration success:', response.data);
+
+        // You can redirect to the login page here if needed
+        // this.$router.push('/login');
+      } catch (error) {
+        // Handle API errors, for example, show an error message
+        console.error('Registration error:', error);
+      }
     },
   },
 };
 </script>
-
 
 <style scoped>
 /* Global styles */
