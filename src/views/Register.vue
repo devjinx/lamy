@@ -1,6 +1,6 @@
 <template>
   <form class="register-form" @submit.prevent="registerUser">
-    <div class="centered">      
+    <div class="centered">
       <h1>Register</h1>
     </div>
     <label for="username">Username:</label>
@@ -9,7 +9,7 @@
     <input type="password" id="password" v-model="password" name="password" required /><br /><br />
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" required /><br /><br />
-    <div class="centered">      
+    <div class="centered">
       <div class="form-buttons">
         <input type="submit" value="Register" class="register-button" />
         <router-link to="/login" class="back-to-login-button">Back to Login</router-link>
@@ -27,7 +27,7 @@ export default {
     return {
       username: '',
       password: '',
-      confirmPassword: '', 
+      confirmPassword: '',
     };
   },
   methods: {
@@ -45,7 +45,7 @@ export default {
       };
 
       try {
-        // Call the signUp function from the API service
+        // Call the signUp function from the API service with the corrected payload
         const response = await signUp(userData);
 
         // Handle the API response here, for example, show a success message or redirect to the login page
@@ -115,7 +115,7 @@ input[type="password"] {
 /* Style the submit button */
 input[type="submit"] {
   font-family: 'Kanit', sans-serif;
-  margin-left: 20px; 
+  margin-left: 20px;
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
@@ -131,7 +131,7 @@ input[type="submit"]:hover {
 
 .back-to-login-button {
   font-family: 'Kanit', sans-serif;
-  margin-left: 20px; 
+  margin-left: 20px;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -139,7 +139,7 @@ input[type="submit"]:hover {
   font-size: 18px;
   background-color: #007bff;
   color: #fff;
-  text-decoration: none; 
+  text-decoration: none;
 }
 .centered {
   text-align: center;

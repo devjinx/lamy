@@ -5,19 +5,28 @@ const instance = axios.create({
   withCredentials: true, // Send cookies with requests for authorization
 });
 
+// Request interceptor to add a "Cookie" header with the token value
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("lamy_token");
+  if (token) {
+    config.headers["Cookie"] = lamy_token=${token};
+  }
+  return config;
+});
+
 // Define functions for making API requests
 export const signIn = (username, password, recaptchaResponse) => {
   return instance.post('/auth/sign_in', {
-    username,
-    password,
+    username: username,
+    password: password,
     'g-recaptcha-response': recaptchaResponse,
   });
 };
 
 export const signUp = (username, password, recaptchaResponse) => {
   return instance.post('/auth/sign_up', {
-    username,
-    password,
+    username: username,
+    password: password,
     'g-recaptcha-response': recaptchaResponse,
   });
 };
@@ -44,7 +53,7 @@ export const getProducts = () => {
 };
 
 export const getProductByIdOrSlug = (idOrSlug) => {
-  return instance.get(`/product/${idOrSlug}`);
+  return instance.get(`/products/${idOrSlug}`);
 };
 
 export const buyStockProduct = (productId, amount) => {
