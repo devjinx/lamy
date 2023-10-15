@@ -1,85 +1,91 @@
-import axios from 'axios';
+    import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'https://nswb-dev.lamy.pw/thanakorn/v0', 
-  withCredentials: true, // Send cookies with requests for authorization
-});
+    const API_BASE_URL = 'https://nswb-dev.lamy.pw/thanakorn/v0';
 
-// Request interceptor to add a "Cookie" header with the token value
-instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("lamy_token");
-  if (token) {
-    config.headers["Cookie"] = lamy_token=${token};
-  }
-  return config;
-});
+    // Function to set headers with credentials
+    const setHeadersWithCredentials = () => {
+      return {
+        withCredentials: true,
+      };
+    };
 
-// Define functions for making API requests
-export const signIn = (username, password, recaptchaResponse) => {
-  return instance.post('/auth/sign_in', {
-    username: username,
-    password: password,
-    'g-recaptcha-response': recaptchaResponse,
-  });
-};
+    // Function to handle API errors
+    const handleAPIError = (error) => {
+      if (error.response) {
+        // The request was made, but the server responded with an error.
+        console.error('API Error:', error.response.data);
+      } else {
+        // Something happened in setting up the request that triggered an error.
+        console.error('Request Error:', error.message);
+      }
+      throw error;
+    };
 
-export const signUp = (username, password, recaptchaResponse) => {
-  return instance.post('/auth/sign_up', {
-    username: username,
-    password: password,
-    'g-recaptcha-response': recaptchaResponse,
-  });
-};
+    // Authentication API
 
-export const signOut = () => {
-  return instance.post('/auth/sign_out');
-};
+    export const signIn = async (username, password) => {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/auth/sign_in`,
+          {
+            username,
+            password,
+          },
+          setHeadersWithCredentials()
+        );
+        return response.data;
+      } catch (error) {
+        handleAPIError(error);
+      }
+    };
 
-export const getUserInfo = () => {
-  return instance.get('/users/@me');
-};
+    export const signUp = async (username, password) => {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/auth/sign_up`,
+          {
+            username,
+            password,
+          },
+          setHeadersWithCredentials()
+        );
+        return response.data;
+      } catch (error) {
+        handleAPIError(error);
+      }
+    };
 
-// Store-related functions
-export const getCategories = () => {
-  return instance.get('/categories');
-};
+    export const signOut = async () => {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/auth/sign_out`,
+          {},
+          setHeadersWithCredentials()
+        );
+        return response.data;
+      } catch (error) {
+        handleAPIError(error);
+      }
+    };
 
-export const getCategoryByIdOrSlug = (idOrSlug) => {
-  return instance.get(`/categories/${idOrSlug}`);
-};
+    // Settings API
 
-export const getProducts = () => {
-  return instance.get('/products');
-};
+    export const getSettings = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/settings`, setHeadersWithCredentials());
+        return response.data;
+      } catch (error) {
+        handleAPIError(error);
+      }
+    };
 
-export const getProductByIdOrSlug = (idOrSlug) => {
-  return instance.get(`/products/${idOrSlug}`);
-};
+    // Other API functions for Stats, User, Categories, Products, etc. can be added similarly.
 
-export const buyStockProduct = (productId, amount) => {
-  return instance.post(`/orders/stock/${productId}`, { amount });
-};
-
-export const buyIdPassProduct = (productId, amount, data) => {
-  return instance.post(`/orders/id_pass/${productId}`, { amount, data });
-};
-
-export const getOrderHistory = () => {
-  return instance.get('/orders');
-};
-
-// Topup-related functions
-export const topupTrueMoneyVoucher = (voucherCode, recaptchaResponse) => {
-  return instance.post('/topup/truemoney/voucher', { voucher_code: voucherCode, 'g-recaptcha-response': recaptchaResponse });
-};
-
-export const verifySlip = (barcode, recaptchaResponse) => {
-  return instance.post('/topup/scanslip', { barcode, 'g-recaptcha-response': recaptchaResponse });
-};
-
-export const getTopupHistory = () => {
-  return instance.get('/topup');
-};
-
-// Export the Axios instance with the interceptors
-export default instance;
+    // Export the API functions
+    export default {
+      signIn,
+      signUp,
+      signOut,
+      getSettings,
+      // Add other API functions here
+    };
