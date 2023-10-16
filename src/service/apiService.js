@@ -1,91 +1,167 @@
-    import axios from 'axios';
+import axios from 'axios';
 
-    const API_BASE_URL = 'https://nswb-dev.lamy.pw/thanakorn/v0';
+const API_BASE_URL = 'https://nswb-dev.lamy.pw/thanakorn/v0'; 
 
-    // Function to set headers with credentials
-    const setHeadersWithCredentials = () => {
-      return {
-        withCredentials: true,
-      };
-    };
+// Create an Axios instance
+const instance = axios.create({
+  baseURL: API_BASE_URL,
+});
 
-    // Function to handle API errors
-    const handleAPIError = (error) => {
-      if (error.response) {
-        // The request was made, but the server responded with an error.
-        console.error('API Error:', error.response.data);
-      } else {
-        // Something happened in setting up the request that triggered an error.
-        console.error('Request Error:', error.message);
-      }
-      throw error;
-    };
+// Request interceptor to add a "Cookie" header with the token value
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("lamy_token");
+  if (token) {
+    config.headers["Cookie"] = `lamy_token=${token}`;
+  }
+  return config;
+});
 
-    // Authentication API
+const setHeadersWithCredentials = () => ({ withCredentials: true });
 
-    export const signIn = async (username, password) => {
-      try {
-        const response = await axios.post(
-          `${API_BASE_URL}/auth/sign_in`,
-          {
-            username,
-            password,
-          },
-          setHeadersWithCredentials()
-        );
-        return response.data;
-      } catch (error) {
-        handleAPIError(error);
-      }
-    };
+const handleAPIError = (error) => {
+  if (error.response) {
+    console.error('API Error:', error.response.data);
+  } else {
+    console.error('Request Error:', error.message);
+  }
+  throw error;
+};
 
-    export const signUp = async (username, password) => {
-      try {
-        const response = await axios.post(
-          `${API_BASE_URL}/auth/sign_up`,
-          {
-            username,
-            password,
-          },
-          setHeadersWithCredentials()
-        );
-        return response.data;
-      } catch (error) {
-        handleAPIError(error);
-      }
-    };
+// Authentication API
+export const signIn = async (username, password, recaptchaResponse) => {
+  try {
+    const response = await instance.post(`${API_BASE_URL}/auth/sign_in`, {
+      username,
+      password,
+      "g-recaptcha-response": recaptchaResponse,
+    }, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
 
-    export const signOut = async () => {
-      try {
-        const response = await axios.post(
-          `${API_BASE_URL}/auth/sign_out`,
-          {},
-          setHeadersWithCredentials()
-        );
-        return response.data;
-      } catch (error) {
-        handleAPIError(error);
-      }
-    };
+// ... (rest of your API functions remain the same)
 
-    // Settings API
+export const signUp = async (username, password, recaptchaResponse) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/auth/sign_up`, {
+      username,
+      password,
+      "g-recaptcha-response": recaptchaResponse,
+    }, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
 
-    export const getSettings = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/settings`, setHeadersWithCredentials());
-        return response.data;
-      } catch (error) {
-        handleAPIError(error);
-      }
-    };
+export const signOut = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/auth/sign_out`, {}, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
 
-    // Other API functions for Stats, User, Categories, Products, etc. can be added similarly.
+// Settings API
+export const getSettings = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/settings`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
 
-    // Export the API functions
-    export default {
-      signIn,
-      signUp,
-      signOut,
-      getSettings,
-      // Add other API functions here
-    };
+// Stats API
+export const getStats = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/stats`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+// User API
+export const getCurrentUser = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/users/@me`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+// Categories API
+export const getCategories = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/categories`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+export const getCategory = async (idOrSlug) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/categories/${idOrSlug}`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+// Products API
+export const getProducts = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/products`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+export const getProduct = async (idOrSlug) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/product/${idOrSlug}`, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+export const buyStockProduct = async (productId, amount) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/orders/stock/${productId}`, { amount }, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+export const buyIdPassProduct = async (productId, amount, data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/orders/id_pass/${productId}`, { amount, data }, setHeadersWithCredentials());
+    return response.data;
+  } catch (error) {
+    handleAPIError(error);
+  }
+};
+
+export default {
+  signIn,
+  signUp,
+  signOut,
+  getSettings,
+  getStats,
+  getCurrentUser,
+  getCategories,
+  getCategory,
+  getProducts,
+  getProduct,
+  buyStockProduct,
+  buyIdPassProduct,
+};
