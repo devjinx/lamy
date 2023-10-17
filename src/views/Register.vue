@@ -9,6 +9,14 @@
     <input type="password" id="password" v-model="password" name="password" required /><br /><br />
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" required /><br /><br />
+    
+    <!-- Display error messages -->
+    <div v-if="errorMessages.length" class="error-messages">
+      <ul>
+        <li v-for="message in errorMessages" :key="message">{{ message }}</li>
+      </ul>
+    </div>
+    
     <div class="centered">
       <div class="form-buttons">
         <input type="submit" value="Register" class="register-button" />
@@ -27,12 +35,21 @@ export default {
       username: '',
       password: '',
       confirmPassword: '',
+      errorMessages: [],
     };
   },
   methods: {
     async registerUser() {
+      this.errorMessages = [];
+
       if (this.password !== this.confirmPassword) {
-        console.error('Password and confirm password do not match');
+        this.errorMessages.push('Password and confirm password do not match');
+        return;
+      }
+
+      // Call the isPasswordValid method
+      if (!this.isPasswordValid(this.password)) {
+        this.errorMessages.push('Password must meet the criteria.');
         return;
       }
 
@@ -41,18 +58,21 @@ export default {
         password: this.password,
         // Add other registration data as needed
       };
-      
-      try {
-        // Make an API call to register the user
-        console.log('Request Payload:', userData); // Log the payload for debugging
-        const response = await signUp(userData);
 
+      try {
+        console.log('Request Payload:', userData);
+        const response = await signUp(userData);
         console.log('Registration success:', response.data);
-        // You can redirect the user to a login page here
+        // Redirect the user to a login page or show a success message
         // this.$router.push('/login');
       } catch (error) {
         console.error('Registration error:', error);
+        if (error.response) {
+          this.errorMessages.push(...error.response.data.errors.map((error) => error.msg));
+        }
       }
+    },
+    isPasswordValid(password) {
     },
   },
 };
@@ -139,6 +159,9 @@ input[type="submit"]:hover {
 }
 .centered {
   text-align: center;
+}
+.error-messages {
+  color: red;
 }
 
 </style>
