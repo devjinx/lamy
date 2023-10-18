@@ -1,20 +1,24 @@
 <template>
-  <form class="login-form">
+  <form class="login-form" @submit.prevent="login">
     <div class="centered">
       <h1>Login</h1>
     </div>
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required /><br /><br />
+    <input type="text" id="username" v-model="username" name="username" required /><br /><br />
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required /><br /><br />
+    <input type="password" id="password" v-model="password" name="password" required /><br /><br />
+    <div v-if="errorMessages.length" class="error-messages">
+      <ul>
+        <li v-for="message in errorMessages" :key="message">{{ message }}</li>
+      </ul>
+    </div>
+
     <div class="centered">
       <div class="form-buttons">
-      <input type="submit" value="Login" class="login-button" @click="login" />
-      <router-link to="/register" class="back-to-register-button">Register ?</router-link>
+        <input type="submit" value="Login" class="login-button" />
+        <router-link to="/register" class="back-to-register-button">Register ?</router-link>
+      </div>
     </div>
-    </div>
-
-
   </form>
 </template>
 
@@ -24,16 +28,29 @@ export default {
     return {
       username: '',
       password: '',
+      errorMessages: [], // Store error messages
     };
   },
   methods: {
     login() {
+      // Clear previous error messages
+      this.errorMessages = [];
+
       // Simplified example: Implement actual authentication logic here
-      alert(`Logging in with username: ${this.username} and password: ${this.password}`);
+      if (this.username === 'validUsername' && this.password === 'validPassword') {
+        // Successful login
+        alert('Login successful');
+        // You can redirect the user or perform other actions here
+      } else {
+        // Failed login
+        this.errorMessages.push('Invalid username or password');
+        // You can customize error handling for failed logins
+      }
     },
   },
 };
 </script>
+
 
 <style scoped>
 /* Global styles */
@@ -127,5 +144,9 @@ input[type="password"] {
 .centered {
   text-align: center;
 }
+.error-messages {
+  color: red;
+}
+
 
 </style>
