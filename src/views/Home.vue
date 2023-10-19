@@ -10,4 +10,8 @@
     name: 'home',
   };
   </script>
-
+  <style scoped>
+  .home {
+    padding-top: 50px; 
+  }
+</style>

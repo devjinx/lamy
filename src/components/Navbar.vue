@@ -1,5 +1,4 @@
 <template>
-  <h1> a</h1>
   <div class="navbar">
     <div class="navbar-lamy">
       <RouterLink to="/"><a>Lamy</a></RouterLink>
@@ -14,11 +13,9 @@
   </div>
 </template>
 
-<style scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+<style scoped>  
   body, ul {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Kanit', sans-serif;
     margin: 0;
     padding: 0;
   }

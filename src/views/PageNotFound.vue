@@ -13,5 +13,6 @@
     justify-content: center; 
     height: 55vh; 
     text-align: center; 
+    padding-top: 50px; 
   }
 </style>

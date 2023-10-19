@@ -5,45 +5,45 @@ import Login from '../views/Login.vue';
 import Store from '../views/Store.vue';
 import Topup from '../views/Topup.vue';
 import PageNotFound from '../views/PageNotFound.vue';
-import Navbar from '../components/Navbar.vue';
+
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    components: {
+      default: HomeView,
+    },
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
+  {
+    path: '/topup',
+    name: 'topup',
+    component: Topup,
+  },
+  {
+    path: '/store',
+    name: 'store',
+    component: Store,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: PageNotFound,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      components: {
-        default: HomeView,
-        navbar: Navbar,
-      },
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register,
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-    },
-    {
-      path: '/topup',
-      name: 'topup',
-      component: Topup,
-    },
-    {
-      path: '/store',
-      name: 'store',
-      component: Store,
-    },
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'not-found',
-      component: PageNotFound,
-    },
-  ],
+  routes,
 });
 
 export default router;

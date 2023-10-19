@@ -28,12 +28,11 @@ const handleAPIError = (error) => {
 };
 
 // Authentication API
-export const signIn = async (username, password, recaptchaResponse) => {
+export const signIn = async (username, password) => {
   try {
     const response = await instance.post(`${API_BASE_URL}/auth/sign_in`, {
       username,
       password,
-      "g-recaptcha-response": recaptchaResponse,
     }, setHeadersWithCredentials());
     return response.data;
   } catch (error) {
@@ -43,12 +42,11 @@ export const signIn = async (username, password, recaptchaResponse) => {
 
 // ... (rest of your API functions remain the same)
 
-export const signUp = async (username, password, recaptchaResponse) => {
+export const signUp = async (username, password) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/sign_up`, {
       username,
       password,
-      "g-recaptcha-response": recaptchaResponse,
     }, setHeadersWithCredentials());
     return response.data;
   } catch (error) {

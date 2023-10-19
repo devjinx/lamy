@@ -41,24 +41,17 @@ export default {
   methods: {
     async registerUser() {
       this.errorMessages = [];
-
+      
       if (this.password !== this.confirmPassword) {
         this.errorMessages.push('Password and confirm password do not match');
         return;
       }
-
-      // Call the isPasswordValid method
-      if (!this.isPasswordValid(this.password)) {
-        this.errorMessages.push('Password must meet the criteria.');
-        return;
-      }
-
+      
       const userData = {
         username: this.username,
         password: this.password,
-        // Add other registration data as needed
       };
-
+      
       try {
         console.log('Request Payload:', userData);
         const response = await signUp(userData);
@@ -67,12 +60,13 @@ export default {
         // this.$router.push('/login');
       } catch (error) {
         console.error('Registration error:', error);
-        if (error.response) {
-          this.errorMessages.push(...error.response.data.errors.map((error) => error.msg));
+
+        if (error.response && error.response.data.errors) {
+          this.errorMessages = error.response.data.errors.map((error) => error.msg);
+        } else {
+          this.errorMessages.push('An error occurred during registration.');
         }
       }
-    },
-    isPasswordValid(password) {
     },
   },
 };
@@ -108,6 +102,7 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding-top: 50px; 
 }
 
 /* Style the form labels and input fields */

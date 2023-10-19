@@ -98,14 +98,61 @@ input[type="password"] {
 }
 
 /* Style the form buttons */
-.form-buttons {
+/* Global styles */
+body {
   font-family: 'Kanit', sans-serif;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
 }
 
-.login-button,
-.back-to-register-button {
+/* Style the form container */
+h1 {
   font-family: 'Kanit', sans-serif;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.register-form {
+  font-family: 'Kanit', sans-serif;
+  background-color: #ffffff;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Style the form labels and input fields */
+label {
+  font-family: 'Kanit', sans-serif;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+  font-family: 'Kanit', sans-serif;
+  margin-left: 20px;
+  background-color: #007bff;
+  color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -113,19 +160,13 @@ input[type="password"] {
   font-size: 18px;
 }
 
-.login-button {
-  background-color: #007bff;
-  font-family: 'Kanit', sans-serif;
-  color: #fff;
-  margin-right: 20px;
-}
-
-.login-button:hover {
+input[type="submit"]:hover {
   background-color: #0056b3;
 }
 
 .back-to-register-button {
   font-family: 'Kanit', sans-serif;
+  margin-left: 20px;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -133,20 +174,16 @@ input[type="password"] {
   font-size: 18px;
   background-color: #007bff;
   color: #fff;
-  text-decoration: none; 
-  transition: background-color 0.3s;
+  text-decoration: none;
 }
-
-.back-to-register-button:hover {
-  background-color: #0056b3;
-}
-
 .centered {
   text-align: center;
 }
 .error-messages {
   color: red;
 }
-
+.login-form {
+  padding-top: 50px; 
+}
 
 </style>
