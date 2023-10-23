@@ -28,26 +28,18 @@ const handleAPIError = (error) => {
 };
 
 // Authentication API
-export const signIn = async (username, password) => {
+export const signIn = async (userdata) => {
   try {
-    const response = await instance.post(`${API_BASE_URL}/auth/sign_in`, {
-      username,
-      password,
-    }, setHeadersWithCredentials());
+    const response = await instance.post(`${API_BASE_URL}/auth/sign_in`, userdata, setHeadersWithCredentials());
     return response.data;
   } catch (error) {
     handleAPIError(error);
   }
 };
 
-// ... (rest of your API functions remain the same)
-
-export const signUp = async (username, password) => {
+export const signUp = async (userdata) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/sign_up`, {
-      username,
-      password,
-    }, setHeadersWithCredentials());
+    const response = await axios.post(`${API_BASE_URL}/auth/sign_up`, userdata, setHeadersWithCredentials());
     return response.data;
   } catch (error) {
     handleAPIError(error);
