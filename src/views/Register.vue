@@ -39,36 +39,35 @@ export default {
     };
   },
   methods: {
-    async registerUser() {
-      this.errorMessages = [];
-      
-      if (this.password !== this.confirmPassword) {
-        this.errorMessages.push('Password and confirm password do not match');
-        return;
-      }
-      
-      const userData = {
-        username: this.username,
-        password: this.password,
-      };
-      
-      try {
-        console.log('Request Payload:', userData);
-        const response = await signUp(userData);
-        console.log('Registration success:', response.data);
-        // Redirect the user to a login page or show a success message
-        // this.$router.push('/login');
-      } catch (error) {
-        console.error('Registration error:', error);
+  async registerUser() {
+    this.errorMessages = [];
 
-        if (error.response && error.response.data.errors) {
-          this.errorMessages = error.response.data.errors.map((error) => error.msg);
-        } else {
-          this.errorMessages.push('An error occurred during registration.');
-        }
+    if (this.password !== this.confirmPassword) {
+      this.errorMessages.push('Password and confirm password do not match');
+      return;
+    }
+
+    const userData = {
+      username: this.username,
+      password: this.password,
+    };
+
+    try {
+      const response = await signUp(userData);
+      console.log('Registration success:', response.data);
+
+      // Redirect the user to the login page
+      this.$router.push('/login');
+    } catch (error) {
+      console.error('Registration error:', error);
+      if (error.response && error.response.data.errors) {
+        this.errorMessages = error.response.data.errors.map((error) => error.msg);
+      } else {
+        this.errorMessages.push('An error occurred during registration.');
       }
-    },
+    }
   },
+},
 };
 </script>
 

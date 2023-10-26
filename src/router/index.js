@@ -5,6 +5,7 @@ import Login from '../views/Login.vue';
 import Store from '../views/Store.vue';
 import Topup from '../views/Topup.vue';
 import PageNotFound from '../views/PageNotFound.vue';
+import Dashboard from '../views/dashboard.vue';
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path: '/store',
     name: 'store',
     component: Store,
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
   },
   {
     path: '/:pathMatch(.*)*',
