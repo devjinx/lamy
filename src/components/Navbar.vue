@@ -7,11 +7,64 @@
       <RouterLink to="/topup"><a>Topup</a></RouterLink>
     </div>
     <div class="navbar-right">
-      <RouterLink to="/login"><a>Sign in</a></RouterLink>
-      <RouterLink to="/register"><a>Sign up</a></RouterLink>
+      <template v-if="userIsAuthenticated">
+        <!-- Display username and logout option when the user is authenticated -->
+        <div class="user-dropdown">
+          <a class="user-username">{{ username }}</a>
+          <div class="user-dropdown-content">
+            <a @click="logout">Logout</a>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <!-- Display sign-in and sign-up when the user is not authenticated -->
+        <RouterLink to="/login"><a>Sign in</a></RouterLink>
+        <RouterLink to="/register"><a>Sign up</a></RouterLink>
+      </template>
     </div>
   </div>
 </template>
+
+<script>
+import apiService from '../service/apiService.js';
+export default {
+  data() {
+    return {
+      userIsAuthenticated: false, // Initially, the user is not authenticated
+      username: '', // Initialize username to an empty string
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const userData = {
+          // Provide the user data for authentication, e.g., email and password
+          // Replace these with actual user input or data from a form
+        };
+        const response = await apiService.signIn(userData);
+
+        // Assuming the login was successful, set userIsAuthenticated and username
+        this.userIsAuthenticated = true;
+        this.username = response.username; // Adjust this based on your API response
+      } catch (error) {
+        // Handle login error, e.g., show an error message
+        console.error('Login error:', error);
+      }
+    },
+    async logout() {
+      try {
+        await apiService.signOut();
+        // Assuming the logout was successful, reset userIsAuthenticated and username
+        this.userIsAuthenticated = false;
+        this.username = '';
+      } catch (error) {
+        // Handle logout error, e.g., show an error message
+        console.error('Logout error:', error);
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>  
   body, ul {
