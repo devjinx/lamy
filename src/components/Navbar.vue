@@ -1,14 +1,13 @@
 <template>
   <div class="navbar">
     <div class="navbar-lamy">
-      <RouterLink to="/"><a>Lamy</a></RouterLink>
-      <RouterLink to="/"><a>Home</a></RouterLink>
-      <RouterLink to="/store"><a>Store</a></RouterLink>
-      <RouterLink to="/topup"><a>Topup</a></RouterLink>
+      <router-link to="/"><a>Lamy</a></router-link>
+      <router-link to="/"><a>Home</a></router-link>
+      <router-link to="/store"><a>Store</a></router-link>
+      <router-link to="/topup"><a>Topup</a></router-link>
     </div>
     <div class="navbar-right">
       <template v-if="userIsAuthenticated">
-        <!-- Display username and logout option when the user is authenticated -->
         <div class="user-dropdown">
           <a class="user-username">{{ username }}</a>
           <div class="user-dropdown-content">
@@ -17,9 +16,8 @@
         </div>
       </template>
       <template v-else>
-        <!-- Display sign-in and sign-up when the user is not authenticated -->
-        <RouterLink to="/login"><a>Sign in</a></RouterLink>
-        <RouterLink to="/register"><a>Sign up</a></RouterLink>
+        <router-link to="/login"><a>Sign in</a></router-link>
+        <router-link to="/register"><a>Sign up</a></router-link>
       </template>
     </div>
   </div>
@@ -27,43 +25,41 @@
 
 <script>
 import apiService from '../service/apiService.js';
+
 export default {
   data() {
     return {
-      userIsAuthenticated: false, // Initially, the user is not authenticated
-      username: '', // Initialize username to an empty string
+      userIsAuthenticated: false,
+      username: '',
     };
   },
   methods: {
     async login() {
-      try {
-        const userData = {
-          // Provide the user data for authentication, e.g., email and password
-          // Replace these with actual user input or data from a form
-        };
-        const response = await apiService.signIn(userData);
-
-        // Assuming the login was successful, set userIsAuthenticated and username
+      // Simulated login, replace with actual authentication logic
+      // Assume a successful login response with a username
+      const response = await fakeLogin(); // Replace with your API service
+      console.log(response); // Log the response
+      if (response.success) {
         this.userIsAuthenticated = true;
-        this.username = response.username; // Adjust this based on your API response
-      } catch (error) {
-        // Handle login error, e.g., show an error message
-        console.error('Login error:', error);
+        this.username = response.username;
       }
     },
-    async logout() {
-      try {
-        await apiService.signOut();
-        // Assuming the logout was successful, reset userIsAuthenticated and username
-        this.userIsAuthenticated = false;
-        this.username = '';
-      } catch (error) {
-        // Handle logout error, e.g., show an error message
-        console.error('Logout error:', error);
-      }
+    logout() {
+      // Simulated logout, reset user data
+      this.userIsAuthenticated = false;
+      this.username = '';
     },
   },
 };
+
+async function fakeLogin() {
+  // Simulated login response (replace with real API call)
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ success: true, username: 'JohnDoe' });
+    }, 1000);
+  });
+}
 </script>
 
 <style scoped>  
