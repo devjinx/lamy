@@ -2,8 +2,11 @@
   <div class="home">
     <section id="lamyPage" class="background-image">
       <div class="content">
-        <img src="../assets/Lamy_logo_png.png" alt="logolamy" height="350" width="350">
-        <h1>Test1</h1>
+        <div class="logo-container">
+          <img src="../assets/Lamy_logo_png.png" alt="logolamy" height="350" width="350" class="lamy_logo_in">
+          <h1 class="lamy_text_in">คิดถึงเว็บเช่า</h1>
+          <h2 class="lamy_text_in">คิดถึงลามี่</h2>
+        </div>
       </div>
     </section>
     <section id="lamyService">
@@ -43,7 +46,7 @@ html, body {
 }
 
 #lamyPage {
-  background: linear-gradient(to bottom, #0ea5e9, #65C2F5);
+  background: linear-gradient(to top right, #0ea5e9, #b2e0fa);
   text-align: center;
   color: white;
   min-height: 100vh;
@@ -70,6 +73,44 @@ html, body {
   margin: 0 auto;
   max-width: 100%;
   max-height: 100%;
+  opacity: 0.4; /* 40% transparency */
+}
+
+#lamyPage h1 {
+  position: absolute; /* Position the text absolutely within the container */
+  top: 42%; /* Adjust top position as needed */
+  left: 49%; /* Adjust left position as needed */
+  transform: translate(-50%, -50%); /* Center the text within the container */
+  color: white; /* Text color */
+  font-size: 80px;
+  animation: slideLeftToRighth1 1.5s ease forwards; /* Apply animation */
+}
+#lamyPage h2 {
+  position: absolute; /* Position the text absolutely within the container */
+  top: 53%; /* Adjust top position as needed */
+  left: 44.6%; /* Adjust left position as needed */
+  transform: translate(-50%, -50%); /* Center the text within the container */
+  color: white; /* Text color */
+  font-size: 60px;
+  font-family: 'Kanit', sans-serif;
+  animation: slideLeftToRighth2 1.5s ease forwards; /* Apply animation */
+}
+
+.lamy_logo_in {
+    animation: lamy_logo_in 1.5s ease;
+}
+
+@keyframes lamy_logo_in {
+    from {
+        opacity: 0;
+        scale: 2;
+        transform: translateY(-100px) translateX(100px);
+    }
+    to {
+        opacity: .25;
+        scale: 1;
+        transform: translateY(0px) translateX(0px);
+    }
 }
 
 #lamyService, #lamyPortfolio, #lamyAboutme, #lamyTeamDev {
@@ -82,6 +123,28 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* Add any other styles you want to apply to these sections */
+  font-family: 'Kanit', sans-serif;
+}
+
+@keyframes slideLeftToRighth1 {
+  from {
+    left: 44%; /* Start from the left side */
+    opacity: 0; /* You can adjust opacity as needed */
+  }
+  to {
+    left: 49%; /* Slide to the original position */
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeftToRighth2 {
+  from {
+    left: 40%; /* Start from the left side */
+    opacity: 0; /* You can adjust opacity as needed */
+  }
+  to {
+    left: 44.6%; /* Slide to the original position */
+    opacity: 1;
+  }
 }
 </style>
