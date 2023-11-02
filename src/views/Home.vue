@@ -28,25 +28,35 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  font-family: 'Kanit', sans-serif;
-  height: 100%; /* Ensure the container fills the viewport */
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-.background-image {
-  background: linear-gradient(to top, #0ea5e9, #65C2F5); /* Background color for the id="lamyPage" section */
-  width: 100%;
-  height: 100%; 
+.home {
+  font-family: 'Kanit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Add this to prevent any overflowing content */
+  margin: 0;
+  padding: 0;
+}
+
+#lamyPage {
+  background: linear-gradient(to bottom, #0ea5e9, #65C2F5);
   text-align: center;
-  color: white; /* Text color on top of the background */
-  padding: 20px; /* Add padding to the text for better visibility */
-  min-height: 100vh; /* Make sure the content fills the entire viewport height */
+  color: white;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .content {
@@ -55,19 +65,23 @@ export default {
   align-items: center;
 }
 
-.background-image img {
+#lamyPage img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
   max-height: 100%;
 }
 
-/* Reset the background color for the other sections */
-#lamyService,
-#lamyPortfolio,
-#lamyAboutme,
-#lamyTeamDev {
-  background-color: transparent;
+#lamyService, #lamyPortfolio, #lamyAboutme, #lamyTeamDev {
+  background: white;
   color: initial;
+  padding: 0; /* Remove padding */
+  min-height: 100vh; /* Take up the full viewport height */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Add any other styles you want to apply to these sections */
 }
 </style>

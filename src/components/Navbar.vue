@@ -67,6 +67,7 @@ async function fakeLogin() {
     font-family: 'Kanit', sans-serif;
     margin: 0;
     padding: 0;
+    
   }
 
   /* Center the navigation bar */
