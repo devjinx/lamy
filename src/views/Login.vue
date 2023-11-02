@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 body {
   font-family: 'Kanit', sans-serif;
   text-align: center;

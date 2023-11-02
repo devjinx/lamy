@@ -62,7 +62,7 @@ async function fakeLogin() {
 }
 </script>
 
-<style scoped>  
+<style>  
   body, ul {
     font-family: 'Kanit', sans-serif;
     margin: 0;

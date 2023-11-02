@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .footer {
   font-family: 'Kanit', sans-serif;
   position: fixed;

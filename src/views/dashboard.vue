@@ -9,7 +9,7 @@
     name: 'dashboard',
   };
   </script>
-  <style scoped>
+  <style>
   .dashboard {
     padding-top: 50px; 
   }
