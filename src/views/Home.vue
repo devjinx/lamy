@@ -11,16 +11,16 @@
     </section>
   <section id="lamyService">
     <h1>บริการของเรา</h1>
-    <p>บริการเว็บเช่าที่จะมอบประสบการณ์ใหม่ให้กับคุณ Lamy เป็นบริการย่อยของในเครือ AONA</p>
+    <p>บริการเว็บเช่าที่จะมอบประสบการณ์ใหม่ให้กับคุณ Lamy เป็นบริการย่อยในเครือ AONA</p>
   </section>
     <section id="lamyPortfolio">
-      <h1>Test3</h1>
+      <h1>ผลงานของเรา</h1>
     </section>
     <section id="lamyAboutme">
-      <h1>Test4</h1>
+      <h1>เกี่ยวกับเรา</h1>
     </section>
     <section id="lamyTeamDev">
-      <h1>Test5</h1>
+      <h1>ทีมพัฒนา</h1>
     </section>
   </div>
 </template>

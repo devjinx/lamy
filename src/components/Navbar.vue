@@ -5,6 +5,7 @@
       <router-link to="/"><a>Home</a></router-link>
       <router-link to="/store"><a>Store</a></router-link>
       <router-link to="/topup"><a>Topup</a></router-link>
+      <a href="https://web.facebook.com/lamy.pw">Contact</a>
     </div>
     <div class="navbar-right">
       <template v-if="userIsAuthenticated">
