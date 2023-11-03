@@ -9,9 +9,10 @@
         </div>
       </div>
     </section>
-    <section id="lamyService">
-      <h1>Test2</h1>
-    </section>
+  <section id="lamyService">
+    <h1>บริการของเรา</h1>
+    <p>บริการเว็บเช่าที่จะมอบประสบการณ์ใหม่ให้กับคุณ Lamy เป็นบริการย่อยของในเครือ AONA</p>
+  </section>
     <section id="lamyPortfolio">
       <h1>Test3</h1>
     </section>
@@ -87,8 +88,8 @@ html, body {
 }
 #lamyPage h2 {
   position: absolute; /* Position the text absolutely within the container */
-  top: 53%; /* Adjust top position as needed */
-  left: 44.6%; /* Adjust left position as needed */
+  top: 48%; /* Adjust top position as needed */
+  left: 44.2%; /* Adjust left position as needed */
   transform: translate(-50%, -50%); /* Center the text within the container */
   color: white; /* Text color */
   font-size: 60px;
@@ -113,19 +114,6 @@ html, body {
     }
 }
 
-#lamyService, #lamyPortfolio, #lamyAboutme, #lamyTeamDev {
-  background: white;
-  color: initial;
-  padding: 0; /* Remove padding */
-  min-height: 100vh; /* Take up the full viewport height */
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Kanit', sans-serif;
-}
-
 @keyframes slideLeftToRighth1 {
   from {
     left: 44%; /* Start from the left side */
@@ -143,8 +131,67 @@ html, body {
     opacity: 0; /* You can adjust opacity as needed */
   }
   to {
-    left: 44.6%; /* Slide to the original position */
+    left: 44.2%; /* Slide to the original position */
     opacity: 1;
   }
+}
+#lamyService {
+  background: whitesmoke;
+  padding: 0;
+  min-height: 30vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Add this for positioning */
+}
+#lamyService h1 {
+  font-size: 32px;
+  position: absolute; 
+  top: 20%; 
+  left: 18%; 
+}
+#lamyService p {
+  font-size: 20px;
+  position: absolute; 
+  left: 18%; 
+}
+
+#lamyPortfolio{
+  background: white;
+  color: initial;
+  padding: 0; 
+  min-height: 100vh; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Kanit', sans-serif;
+}
+#lamyAboutme {
+  background: white;
+  color: initial;
+  padding: 0;
+  min-height: 100vh; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Kanit', sans-serif;
+}
+ #lamyTeamDev {
+  background: white;
+  color: initial;
+  padding: 0;
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Kanit', sans-serif;
 }
 </style>
