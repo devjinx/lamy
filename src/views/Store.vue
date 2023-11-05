@@ -4,11 +4,11 @@
       <div class="contentTop">
         <img src="../assets/Lamy_logo_png.png" alt="logolamy" height="300" width="300">
         <h1>ร้านค้า</h1>
-        <p>เลือกหมวดหมู่ที่คุณต้องการ</p>
+        <h2>เลือกหมวดหมู่ที่คุณต้องการ</h2>
       </div>
     </section>
     <section id="lamyService">
-      <h1>Test2</h1>
+      <h3>test</h3>
     </section>
   </div>
 </template>
@@ -19,16 +19,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .homeTop {
-  padding-top: 40px;
+  padding-top: 40px;    
   padding-bottom: 60px;
   font-family: 'Kanit', sans-serif;
   display: flex;
   flex-direction: column;
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  overflow: hidden; /* Add this to prevent any overflowing content */
+  margin: 0; 
+  padding: 0; 
+  overflow: hidden; 
   margin: 0%;
   padding: 0%;
 }
@@ -45,21 +45,21 @@ export default {
   background-size: cover;
   width: 100%;
   height: 100%;
-  position: relative; /* Add this to position child elements */
+  position: relative; 
 }
 
 .contentTop {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Add this to position child elements */
+  position: relative; 
 }
 
 #lamyPageTop img {
   display: block;
   margin: 0 auto;
-  width: 250px;  /* Set the width to 250px */
-  height: 250px; /* Set the height to 250px */
+  width: 250px;  
+  height: 250px; 
   opacity: 0.4;
   position: absolute;
   top: 50%;
@@ -71,15 +71,24 @@ export default {
 #lamyPageTop h1 {
   font-size: 32px;
   z-index: 2;
+  margin: 0; 
 }
 
-#lamyPageTop p {
+#lamyPageTop h2 {
   font-size: 24px;
   z-index: 2;
+  margin: 0; 
 }
 
+#lamyPageTop .header-text {
+  flex-direction: row;
+  align-items: center;
+}
 
-/* Reset the background color for the other sections */
+#lamyPageTop .header-text h1 {
+  margin-right: 10px; 
+}
+
 #lamyService {
   background: white;
   color: initial;
