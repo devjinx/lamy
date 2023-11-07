@@ -8,7 +8,35 @@
       </div>
     </section>
     <section id="lamyService">
-      <h3>test</h3>
+      <div class="box-container">
+      <div class="box">
+        <!-- Content for Box 1 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 2 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 3 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 4 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 5 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 6 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 7 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 8 -->
+      </div>
+      <div class="box">
+        <!-- Content for Box 9 -->
+      </div>
+    </div>
     </section>
   </div>
 </template>
@@ -99,5 +127,24 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#lamyService .box-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#lamyService .box {
+  width: 400px;
+  height: 250px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  margin: 20px;
+  flex: 0 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 </style>
