@@ -36,7 +36,6 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
 .home {
   font-family: 'Kanit', sans-serif;
   display: flex;
@@ -55,7 +54,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-size: cover;
+  background-size: cover; 
   width: 100%;
   height: 100%;
   margin: 0;
@@ -78,62 +77,87 @@ html, body {
 }
 
 #lamyPage h1 {
-  position: absolute; /* Position the text absolutely within the container */
-  top: 42%; /* Adjust top position as needed */
-  left: 49%; /* Adjust left position as needed */
-  transform: translate(-50%, -50%); /* Center the text within the container */
-  color: white; /* Text color */
-  font-size: 80px;
-  animation: slideLeftToRighth1 1.5s ease forwards; /* Apply animation */
+  position: absolute;
+  bottom: 42.5%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 40px;
+  animation: slideLeftToRighth1 1.5s ease forwards;
 }
+
 #lamyPage h2 {
-  position: absolute; /* Position the text absolutely within the container */
-  top: 48%; /* Adjust top position as needed */
-  left: 44.2%; /* Adjust left position as needed */
-  transform: translate(-50%, -50%); /* Center the text within the container */
-  color: white; /* Text color */
-  font-size: 60px;
+  position: absolute;
+  bottom: 40%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 30px;
   font-family: 'Kanit', sans-serif;
-  animation: slideLeftToRighth2 1.5s ease forwards; /* Apply animation */
+  animation: slideLeftToRighth2 1.5s ease forwards;
 }
 
 .lamy_logo_in {
-    animation: lamy_logo_in 1.5s ease;
+  animation: lamy_logo_in 1.5s ease;
 }
 
 @keyframes lamy_logo_in {
-    from {
-        opacity: 0;
-        scale: 2;
-        transform: translateY(-100px) translateX(100px);
-    }
-    to {
-        opacity: .25;
-        scale: 1;
-        transform: translateY(0px) translateX(0px);
-    }
+  from {
+    opacity: 0;
+    transform: scale(2) translateY(-100px) translateX(100px);
+  }
+  to {
+    opacity: 0.25;
+    transform: scale(1) translateY(0px) translateX(0px);
+  }
 }
 
 @keyframes slideLeftToRighth1 {
   from {
-    left: 44%; /* Start from the left side */
-    opacity: 0; /* You can adjust opacity as needed */
+    left: 40%;
+    opacity: 0;
   }
   to {
-    left: 49%; /* Slide to the original position */
+    left: 45%;
     opacity: 1;
   }
 }
 
 @keyframes slideLeftToRighth2 {
   from {
-    left: 40%; /* Start from the left side */
-    opacity: 0; /* You can adjust opacity as needed */
+    left: 38.6%;
+    opacity: 0;
   }
   to {
-    left: 44.2%; /* Slide to the original position */
+    left: 42.6%;
     opacity: 1;
   }
+}
+@media screen and (max-width: 768px) {
+  #lamyPage h1 {
+    font-size: 28px;
+  }
+  #lamyPage h2 {
+    font-size: 24px; 
+  } 
+  @keyframes slideLeftToRighth1 {
+  from {
+    left: 30%;
+    opacity: 0;
+  }
+  to {
+    left: 45%;
+    opacity: 1;
+  }
+}
+  @keyframes slideLeftToRighth2 {
+  from {
+    left: 27%;
+    opacity: 0;
+  }
+  to {
+    left: 40%;
+    opacity: 1;
+  }
+}
 }
 #lamyService {
   background: whitesmoke;
@@ -144,19 +168,11 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative; /* Add this for positioning */
 }
 #lamyService h1 {
   font-size: 32px;
-  position: absolute; 
-  top: 20%; 
-  left: 18%; 
 }
-#lamyService p {
-  font-size: 20px;
-  position: absolute; 
-  left: 18%; 
-}
+
 
 #lamyPortfolio{
   background: white;

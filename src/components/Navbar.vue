@@ -1,27 +1,34 @@
 <template>
-  <div class="navbar">
-    <div class="navbar-lamy">
-      <router-link to="/"><a>Lamy</a></router-link>
-      <router-link to="/"><a>Home</a></router-link>
-      <router-link to="/store"><a>Store</a></router-link>
-      <router-link to="/topup"><a>Topup</a></router-link>
-      <a href="https://web.facebook.com/lamy.pw">Contact</a>
-    </div>
-    <div class="navbar-right">
-      <template v-if="userIsAuthenticated">
-        <div class="user-dropdown">
-          <a class="user-username">{{ username }}</a>
-          <div class="user-dropdown-content">
-            <a @click="logout">Logout</a>
-          </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <router-link to="/" class="navbar-brand">Lamy</router-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <router-link to="/" class="nav-item nav-link">Home</router-link>
+          <router-link to="/store" class="nav-item nav-link">Store</router-link>
+          <router-link to="/topup" class="nav-item nav-link">Topup</router-link>
+          <a href="https://web.facebook.com/lamy.pw" class="nav-item nav-link">Contact</a>
+        </ul>
+        <div class="navbar-right ml-auto">
+          <template v-if="userIsAuthenticated">
+            <div class="user-dropdown dropdown">
+              <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ username }}</a>
+              <div class="dropdown-menu">
+                <a @click="logout" class="dropdown-item">Logout</a>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <router-link to="/login" class="nav-item nav-link">Sign in</router-link>
+            <router-link to="/register" class="nav-item nav-link">Sign up</router-link>
+          </template>
         </div>
-      </template>
-      <template v-else>
-        <router-link to="/login"><a>Sign in</a></router-link>
-        <router-link to="/register"><a>Sign up</a></router-link>
-      </template>
+      </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -54,7 +61,7 @@ export default {
 };
 
 async function fakeLogin() {
-  // Simulated login response (replace with real API call)
+  // Simulated login response (replace with a real API call)
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ success: true, username: 'JohnDoe' });
@@ -62,7 +69,6 @@ async function fakeLogin() {
   });
 }
 </script>
-
 <style>  
   body, ul {
     font-family: 'Kanit', sans-serif;
@@ -98,16 +104,16 @@ async function fakeLogin() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto; /* Center horizontally within the screen */
+    margin: 0 20px 0 auto; /* Add a 20px right margin */
   }
 
   /* Center .navbar-right horizontally */
   .navbar-right {
-    font-family: 'Kanit', sans-serif;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto; /* Center horizontally within the screen */
+  font-family: 'Kanit', sans-serif;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 0 auto; /* Add a 20px right margin */
   }
 </style>
