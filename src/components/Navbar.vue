@@ -22,8 +22,10 @@
             </div>
           </template>
           <template v-else>
-            <router-link to="/login" class="nav-item nav-link">Sign in</router-link>
-            <router-link to="/register" class="nav-item nav-link">Sign up</router-link>
+            <div class="nav-links">
+              <router-link to="/login" class="nav-item nav-link">Sign in</router-link>
+              <router-link to="/register" class="nav-item nav-link">Sign up</router-link>
+            </div>
           </template>
         </div>
       </div>
@@ -69,7 +71,8 @@ async function fakeLogin() {
   });
 }
 </script>
-<style>  
+
+<style>
   body, ul {
     font-family: 'Kanit', sans-serif;
     margin: 0;
@@ -109,11 +112,31 @@ async function fakeLogin() {
 
   /* Center .navbar-right horizontally */
   .navbar-right {
-  font-family: 'Kanit', sans-serif;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 20px 0 auto; /* Add a 20px right margin */
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px 0 auto; /* Add a 20px right margin */
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 40%;
+    }
+  }
+
+  /* Keep "Sign in" and "Sign up" links in the same line on desktop web */
+  @media (min-width: 769px) {
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    .nav-links .nav-item {
+      margin-right: 20px; /* Adjust the margin as needed */
+    }
   }
 </style>
