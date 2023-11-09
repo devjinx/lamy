@@ -7,10 +7,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <router-link to="/" class="nav-item nav-link">Home</router-link>
-          <router-link to="/store" class="nav-item nav-link">Store</router-link>
-          <router-link to="/topup" class="nav-item nav-link">Topup</router-link>
-          <a href="https://web.facebook.com/lamy.pw" class="nav-item nav-link">Contact</a>
+          <router-link to="/" class="nav-item nav-link">
+            <i class="fas fa-home" style="color: #ffffff;"></i> หน้าหลัก
+          </router-link>
+          <router-link to="/store" class="nav-item nav-link">
+            <i class="fas fa-store" style="color: #ffffff;"></i> ร้านค้า
+          </router-link>
+          <router-link to="/topup" class="nav-item nav-link">
+            <i class="fas fa-wallet" style="color: #ffffff;"></i> เติมเงิน
+          </router-link>
+          <a href="https://web.facebook.com/lamy.pw" class="nav-item nav-link">
+            <i class="fas fa-address-card" style="color: #ffffff;"></i> ติดต่อ
+          </a>
         </ul>
         <div class="navbar-right ml-auto">
           <template v-if="userIsAuthenticated">
@@ -23,8 +31,12 @@
           </template>
           <template v-else>
             <div class="nav-links">
-              <router-link to="/login" class="nav-item nav-link">Sign in</router-link>
-              <router-link to="/register" class="nav-item nav-link">Sign up</router-link>
+              <router-link to="/login" class="nav-item nav-link">
+                <i class="fas fa-right-to-bracket" style="color: #ffffff;"></i> เข้าสู่ระบบ
+              </router-link>
+              <router-link to="/register" class="nav-item nav-link">
+                <i class="fas fa-user-plus" style="color: #ffffff;"></i> สร้างบัญชี
+              </router-link>
             </div>
           </template>
         </div>
@@ -125,11 +137,10 @@ async function fakeLogin() {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-left: 40%;
+      margin-left: 33%;
     }
   }
 
-  /* Keep "Sign in" and "Sign up" links in the same line on desktop web */
   @media (min-width: 769px) {
     .nav-links {
       display: flex;
