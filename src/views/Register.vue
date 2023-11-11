@@ -1,30 +1,38 @@
 <template>
-  <form class="register-form" @submit.prevent="registerUser">
-    <div class="centered">
-      <h1>Register</h1>
+  <form class="login-form needs-validation" @submit.prevent="registerUser" novalidate>
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal">สร้างบัญชี</h1>
     </div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" v-model="username" name="username" required /><br /><br />
-    <label for="password">Password:</label>
-    <input type="password" id="password" v-model="password" name="password" required /><br /><br />
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" required /><br /><br />
-    
+    <div class="form-group">
+      <label for="username">ชื่อผู้ใช้:</label>
+      <input type="text" id="username" v-model="username" name="username" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="password">รหัสผ่าน:</label>
+      <input type="password" id="password" v-model="password" name="password" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
+      <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" class="form-control" required />
+      <div class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
+    </div>
+
     <!-- Display error messages -->
-    <div v-if="errorMessages.length" class="error-messages">
+    <div v-if="errorMessages.length" class="alert alert-danger">
       <ul>
         <li v-for="message in errorMessages" :key="message">{{ message }}</li>
       </ul>
     </div>
-    
-    <div class="centered">
-      <div class="form-buttons">
-        <input type="submit" value="Register" class="register-button" />
-        <router-link to="/login" class="back-to-login-button">Back to Login</router-link>
-      </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;">สร้างบัญชี</button>
+    </div>
+    <div class="form-group">
+      <router-link to="/login" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">กลับไปที่หน้าเข้าสู่ระบบ</router-link>
     </div>
   </form>
 </template>
+
 
 <script>
 import { signUp } from '../service/apiService.js';
