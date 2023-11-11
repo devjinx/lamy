@@ -9,15 +9,21 @@
     </div>
     <div class="form-group">
       <label for="password">รหัสผ่าน:</label>
-      <input type="password" id="password" v-model="password" name="password" class="form-control" required />
+      <input type="password" id="password" v-model="password" name="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
     </div>
     <div class="form-group">
       <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
-      <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" class="form-control" required />
-      <div class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
+      <input
+        type="password"
+        id="confirm_password"
+        v-model="confirmPassword"
+        name="confirm_password"
+        class="form-control"
+        required
+        @input="validatePasswordMatch"
+      />
+      <div v-if="!passwordsMatch" class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
     </div>
-
-    <!-- Display error messages -->
     <div v-if="errorMessages.length" class="alert alert-danger">
       <ul>
         <li v-for="message in errorMessages" :key="message">{{ message }}</li>
@@ -25,15 +31,15 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;">สร้างบัญชี</button>
+      <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;" :disabled="isLoading">
+        {{ isLoading ? 'กำลังสร้างบัญชี...' : 'สร้างบัญชี' }}
+      </button>
     </div>
     <div class="form-group">
       <router-link to="/login" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">กลับไปที่หน้าเข้าสู่ระบบ</router-link>
     </div>
   </form>
 </template>
-
-
 <script>
 import { signUp } from '../service/apiService.js';
 
@@ -44,126 +50,109 @@ export default {
       password: '',
       confirmPassword: '',
       errorMessages: [],
+      passwordsMatch: true,
+      isLoading: false,
     };
   },
   methods: {
-  async registerUser() {
-    this.errorMessages = [];
+    validatePasswordMatch() {
+      this.passwordsMatch = this.password === this.confirmPassword;
+    },
+    async registerUser() {
+      this.errorMessages = [];
+      this.passwordsMatch = this.password === this.confirmPassword;
 
-    if (this.password !== this.confirmPassword) {
-      this.errorMessages.push('Password and confirm password do not match');
-      return;
-    }
-
-    const userData = {
-      username: this.username,
-      password: this.password,
-    };
-
-    try {
-      const response = await signUp(userData);
-      console.log('Registration success:', response.data);
-
-      // Redirect the user to the login page
-      this.$router.push('/login');
-    } catch (error) {
-      console.error('Registration error:', error);
-      if (error.response && error.response.data.errors) {
-        this.errorMessages = error.response.data.errors.map((error) => error.msg);
-      } else {
-        this.errorMessages.push('An error occurred during registration.');
+      if (!this.passwordsMatch) {
+        return;
       }
-    }
+
+      this.isLoading = true;
+
+      const userData = {
+        username: this.username,
+        password: this.password,
+      };
+
+      try {
+        const response = await signUp(userData);
+        console.log('Registration success:', response.data);
+
+        // Redirect the user to the login page
+        this.$router.push('/login');
+      } catch (error) {
+        console.error('Registration error:', error);
+        if (error.response && error.response.data.errors) {
+          this.errorMessages = error.response.data.errors.map((error) => error.msg);
+        } else {
+          this.errorMessages.push('An error occurred during registration.');
+        }
+      } finally {
+        this.isLoading = false;
+      }
+    },
   },
-},
 };
 </script>
-
-<style >
-/* Global styles */
+<style>
 body {
   font-family: 'Kanit', sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
   background-color: #f2f2f2;
 }
 
-/* Style the form container */
-h1 {
-  font-family: 'Kanit', sans-serif;
-  font-size: 24px;
-  margin: 20px 0;
-}
-
-.register-form {
-  font-family: 'Kanit', sans-serif;
-  background-color: #ffffff;
+.login-form {
+  background-color: white;
   max-width: 400px;
   margin: 0 auto;
   padding: 100px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding-top: 50px; 
 }
 
-/* Style the form labels and input fields */
-label {
-  font-family: 'Kanit', sans-serif;
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
+.login-form h1 {
+  margin-bottom: 20px;
 }
 
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
+.login-form input {
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  text-align: left; 
 }
 
-/* Style the submit button */
-input[type="submit"] {
-  font-family: 'Kanit', sans-serif;
-  margin-left: 20px;
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
+.login-form label {
+  display: block; 
+  text-align: left;
 }
 
-input[type="submit"]:hover {
-  background-color: #0056b3;
+.login-form button, .login-form .btn-secondary {
+  margin-top: 15px;
+  text-align: left; 
 }
 
-.back-to-login-button {
-  font-family: 'Kanit', sans-serif;
-  margin-left: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-}
-.centered {
-  text-align: center;
-}
 .error-messages {
-  color: red;
+  color: #ff0000;
+}
+@media only screen and (max-width: 600px) {
+  .login-form h1 {
+    font-size: 20px; 
+  }
+  .login-form input {
+    font-size: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  .login-form {
+    max-width: 90%; 
+    padding: 60px;
+  }
+  .login-form label {
+    font-size: 15px;
 }
 
+  .login-form button, .login-form .btn-secondary {
+    font-size: 15px; 
+  }
+}
 </style>
