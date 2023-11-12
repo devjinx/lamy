@@ -52,36 +52,51 @@ export default {
   data() {
     return {
       userIsAuthenticated: false,
-      username: '',
+      userProfile: null,
     };
   },
   methods: {
     async login() {
-      // Simulated login, replace with actual authentication logic
-      // Assume a successful login response with a username
-      const response = await fakeLogin(); // Replace with your API service
-      console.log(response); // Log the response
-      if (response.success) {
+      try {
+        const response = await apiService.signIn({ /* your user data for login */ });
         this.userIsAuthenticated = true;
-        this.username = response.username;
+        this.userProfile = response;
+        
+        // Cache the user profile in localStorage for future use
+        localStorage.setItem('userProfile', JSON.stringify(response));
+      } catch (error) {
+        console.error('Login failed:', error);
+        // Handle login error (e.g., show an error message)
       }
     },
-    logout() {
-      // Simulated logout, reset user data
-      this.userIsAuthenticated = false;
-      this.username = '';
+    async logout() {
+      try {
+        await apiService.signOut();
+        this.userIsAuthenticated = false;
+        this.userProfile = null;
+        
+        // Clear the cached user profile
+        localStorage.removeItem('userProfile');
+      } catch (error) {
+        console.error('Logout failed:', error);
+        // Handle logout error (e.g., show an error message)
+      }
     },
   },
+  created() {
+    // Check if the user is already authenticated on component creation
+    const cachedProfile = localStorage.getItem('userProfile');
+    if (cachedProfile) {
+      try {
+        this.userProfile = JSON.parse(cachedProfile);
+        this.userIsAuthenticated = true;
+      } catch (error) {
+        console.error('Error parsing cached user profile:', error);
+        // Handle the error if parsing fails
+      }
+    }
+  },
 };
-
-async function fakeLogin() {
-  // Simulated login response (replace with a real API call)
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ success: true, username: 'JohnDoe' });
-    }, 1000);
-  });
-}
 </script>
 
 <style>
