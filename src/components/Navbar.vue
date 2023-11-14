@@ -23,8 +23,9 @@
         <div class="navbar-right ml-auto">
           <template v-if="userIsAuthenticated">
             <div class="user-dropdown dropdown">
-              <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ username }}</a>
+              <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
               <div class="dropdown-menu">
+                <a class="dropdown-item">{{ userProfile.username }}</a>
                 <a @click="logout" class="dropdown-item">Logout</a>
               </div>
             </div>
@@ -58,10 +59,11 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await apiService.signIn({ /* your user data for login */ });
+        // Assuming apiService.signIn returns an object with username after successful login
+        const response = await apiService.signIn({ username });
         this.userIsAuthenticated = true;
         this.userProfile = response;
-        
+
         // Cache the user profile in localStorage for future use
         localStorage.setItem('userProfile', JSON.stringify(response));
       } catch (error) {
@@ -74,7 +76,7 @@ export default {
         await apiService.signOut();
         this.userIsAuthenticated = false;
         this.userProfile = null;
-        
+
         // Clear the cached user profile
         localStorage.removeItem('userProfile');
       } catch (error) {
