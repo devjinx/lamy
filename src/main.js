@@ -1,22 +1,20 @@
-import '@fortawesome/fontawesome-free/css/all.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap'
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import App from './App.vue'
-import router from './router'
+import '@fortawesome/fontawesome-free/css/all.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import App from './App.vue';
+import router from './router';
+import { useStore } from './stores';
 
-const app = createApp(App)
+const app = createApp(App);
+const pinia = createPinia();
 
-// Use Pinia for state management
-app.use(createPinia())
+app.use(pinia);
+app.use(router);
+app.component('font-awesome-icon', FontAwesomeIcon);
 
-// Use Vue Router
-app.use(router)
+const store = useStore();
 
-// Register FontAwesome component globally
-app.component('font-awesome-icon', FontAwesomeIcon)
-
-// Mount the app to the element with id 'app'
-app.mount('#app')
+app.use(store);
+app.mount('#app');

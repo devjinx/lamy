@@ -21,15 +21,14 @@
           </a>
         </ul>
         <div class="navbar-right ml-auto">
-          <template v-if="userIsAuthenticated">
-            <div class="user-dropdown dropdown">
-              <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item">{{ userProfile.username }}</a>
-                <a @click="logout" class="dropdown-item">Logout</a>
-              </div>
-            </div>
-          </template>
+          <template v-if="userIsAuthenticated && userProfile">
+        <div class="user-dropdown dropdown">
+          <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
+          <div class="dropdown-menu">
+            <a @click="logout" class="dropdown-item">Logout</a>
+          </div>
+        </div>
+      </template>
           <template v-else>
             <div class="nav-links">
               <router-link to="/login" class="nav-item nav-link">
@@ -47,7 +46,7 @@
 </template>
 
 <script>
-import apiService from '../service/apiService.js';
+import apiService from '../service/apiService.js'; // Replace with your authentication service
 
 export default {
   data() {
@@ -57,49 +56,44 @@ export default {
     };
   },
   methods: {
-    async login() {
-      try {
-        // Assuming apiService.signIn returns an object with username after successful login
-        const response = await apiService.signIn({ username });
-        this.userIsAuthenticated = true;
-        this.userProfile = response;
-
-        // Cache the user profile in localStorage for future use
-        localStorage.setItem('userProfile', JSON.stringify(response));
-      } catch (error) {
-        console.error('Login failed:', error);
-        // Handle login error (e.g., show an error message)
-      }
-    },
     async logout() {
       try {
+        // Perform logout logic (e.g., call authentication service to sign out)
         await apiService.signOut();
+
+        // Clear local data and update component state
         this.userIsAuthenticated = false;
         this.userProfile = null;
-
-        // Clear the cached user profile
         localStorage.removeItem('userProfile');
       } catch (error) {
         console.error('Logout failed:', error);
-        // Handle logout error (e.g., show an error message)
+      }
+    },
+    async checkAuthentication() {
+      try {
+        const token = localStorage.getItem('lamy_token'); // Get user token from local storage
+
+        if (token) {
+          const userProfile = await apiService.getCurrentUser(); // Fetch user profile data
+
+          // Update component data with authentication status and user profile
+          this.userIsAuthenticated = true;
+          this.userProfile = userProfile;
+
+          // Optionally, store user profile data in local storage
+          localStorage.setItem('userProfile', JSON.stringify(userProfile));
+        }
+      } catch (error) {
+        console.error('Authentication check failed:', error);
       }
     },
   },
   created() {
-    // Check if the user is already authenticated on component creation
-    const cachedProfile = localStorage.getItem('userProfile');
-    if (cachedProfile) {
-      try {
-        this.userProfile = JSON.parse(cachedProfile);
-        this.userIsAuthenticated = true;
-      } catch (error) {
-        console.error('Error parsing cached user profile:', error);
-        // Handle the error if parsing fails
-      }
-    }
+    this.checkAuthentication(); // Call the authentication check when the component is created
   },
 };
 </script>
+
 
 <style>
   body, ul {
