@@ -21,14 +21,15 @@
           </a>
         </ul>
         <div class="navbar-right ml-auto">
-          <template v-if="userIsAuthenticated && userProfile">
-        <div class="user-dropdown dropdown">
-          <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
-          <div class="dropdown-menu">
-            <a @click="logout" class="dropdown-item">Logout</a>
-          </div>
-        </div>
-      </template>
+          <template v-if="userIsAuthenticated">
+            <div class="user-dropdown dropdown">
+              <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item">{{ userProfile.username }}</a>
+                <a @click="logout" class="dropdown-item">Logout</a>
+              </div>
+            </div>
+          </template>
           <template v-else>
             <div class="nav-links">
               <router-link to="/login" class="nav-item nav-link">
@@ -46,50 +47,48 @@
 </template>
 
 <script>
-import apiService from '../service/apiService.js'; // Replace with your authentication service
+import apiService from '../service/apiService.js';
 
 export default {
   data() {
     return {
       userIsAuthenticated: false,
       userProfile: null,
+      username: '', // Assuming there's an input for the username
+      // Other data properties...
     };
   },
   methods: {
-    async logout() {
+    async login() {
       try {
-        // Perform logout logic (e.g., call authentication service to sign out)
-        await apiService.signOut();
+        const response = await apiService.signIn({ username: this.username }); // Perform login
+        if (response && response.username) {
+          this.userIsAuthenticated = true; // Update authentication status
+          this.userProfile = response; // Set userProfile with the response data
 
-        // Clear local data and update component state
-        this.userIsAuthenticated = false;
-        this.userProfile = null;
-        localStorage.removeItem('userProfile');
-      } catch (error) {
-        console.error('Logout failed:', error);
-      }
-    },
-    async checkAuthentication() {
-      try {
-        const token = localStorage.getItem('lamy_token'); // Get user token from local storage
-
-        if (token) {
-          const userProfile = await apiService.getCurrentUser(); // Fetch user profile data
-
-          // Update component data with authentication status and user profile
-          this.userIsAuthenticated = true;
-          this.userProfile = userProfile;
-
-          // Optionally, store user profile data in local storage
-          localStorage.setItem('userProfile', JSON.stringify(userProfile));
+          // Cache the user profile in localStorage for future use
+          localStorage.setItem('userProfile', JSON.stringify(response));
+        } else {
+          console.error('Invalid user data received'); // Handle invalid response
         }
       } catch (error) {
-        console.error('Authentication check failed:', error);
+        console.error('Login failed:', error); // Handle login error
       }
     },
+    // Other methods...
   },
   created() {
-    this.checkAuthentication(); // Call the authentication check when the component is created
+    // Check if the user is already authenticated on component creation
+    const cachedProfile = localStorage.getItem('userProfile');
+    if (cachedProfile) {
+      try {
+        this.userProfile = JSON.parse(cachedProfile);
+        this.userIsAuthenticated = true;
+      } catch (error) {
+        console.error('Error parsing cached user profile:', error);
+        // Handle the error if parsing fails
+      }
+    }
   },
 };
 </script>
@@ -100,7 +99,6 @@ export default {
     font-family: 'Kanit', sans-serif;
     margin: 0;
     padding: 0;
-    
   }
 
   /* Center the navigation bar */

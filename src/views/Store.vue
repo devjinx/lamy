@@ -2,6 +2,7 @@
   <div class="homeTop">
     <section id="lamyPageTop" class="background-image">
       <div class="contentTop">
+        <p></p>
         <img src="../assets/Lamy_logo_png.png" alt="logolamy" height="300" width="300">
         <h1>ร้านค้า</h1>
         <h2>เลือกหมวดหมู่ที่คุณต้องการ</h2>
