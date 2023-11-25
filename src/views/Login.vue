@@ -26,7 +26,6 @@
     </div>
   </form>
 </template>
-
 <script>
 import apiService from '../service/apiService.js';
 
@@ -40,43 +39,42 @@ export default {
   },
   methods: {  
     async login() {
-       this.errorMessages = []; // Clear previous error messages
+      this.errorMessages = []; // Clear previous error messages
 
-  try {
-    const userData = {
-      username: this.username,
-      password: this.password,
-    };
+      try {
+        const userData = {
+          username: this.username,
+          password: this.password,
+        };
 
-    const response = await apiService.signIn(userData);
-    console.log(response); // Log the response check
+        const response = await apiService.signIn(userData);
+        console.log(response); // Log the response check
 
-    if (response.data && response.data.token) {
-      // Token is present in the response
-      // Store the token, e.g., in local storage or Vuex state
-      localStorage.setItem('authToken', response.data.token);
-
-      alert('เข้าสู่ระบบสำเร็จ');
-      this.$router.push('/');
-      // Redirect to the home page when login is successful
-    } else {
-      if (response.message) {
-        this.errorMessages.push(response.message);
+        if (response.data && response.data.token) {
+          localStorage.setItem('authToken', response.data.token);
+          const userProfileResponse = await apiService.getCurrentUser();
+          if (userProfileResponse && userProfileResponse.data) {
+            localStorage.setItem('userProfile', JSON.stringify(userProfileResponse.data));
+          }
+          alert('เข้าสู่ระบบสำเร็จ');
+          this.$router.push('/');
+          // Redirect to the home page when login is successful
+        } else {
+          if (response.message) {
+            this.errorMessages.push(response.message);
+          }
+        }
+      } catch (error) {
+        if (error.response && error.response.data && error.response.data.message) {
+          this.errorMessages.push(error.response.data.message);
+        } else {
+          this.errorMessages.push('An error occurred during the login');
+        }
       }
-    }
-  } catch (error) {
-    if (error.response && error.response.data && error.response.data.message) {
-      this.errorMessages.push(error.response.data.message);
-    } else {
-      this.errorMessages.push('An error occurred during the login');
-    }
-  }
-},
-
+    },
   },
 };
 </script>
-
 <style>
 body {
   font-family: 'Kanit', sans-serif;

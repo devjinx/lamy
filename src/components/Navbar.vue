@@ -21,12 +21,12 @@
           </a>
         </ul>
         <div class="navbar-right ml-auto">
-          <template v-if="userIsAuthenticated">
+          <template v-if="userIsAuthenticated && userProfile">
             <div class="user-dropdown dropdown">
               <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item">{{ userProfile.username }}</a>
-                <a @click="logout" class="dropdown-item">Logout</a>
+                <a @click="logout" class="dropdown-item">ลงชื่อออก</a>
               </div>
             </div>
           </template>
@@ -36,7 +36,7 @@
                 <i class="fas fa-right-to-bracket" style="color: #ffffff;"></i> เข้าสู่ระบบ
               </router-link>
               <router-link to="/register" class="nav-item nav-link">
-                <i class="fas fa-user-plus" style="color: #ffffff;"></i> สร้างบัญชี
+                <i class="fas fa-user-plus" style="color: #ffffff;"></i> สมัครสมาชิก
               </router-link>
             </div>
           </template>
@@ -55,44 +55,47 @@ export default {
       userIsAuthenticated: false,
       userProfile: null,
       username: '', // Assuming there's an input for the username
-      // Other data properties...
     };
   },
   methods: {
     async login() {
       try {
-        const response = await apiService.signIn({ username: this.username }); // Perform login
-        if (response && response.username) {
-          this.userIsAuthenticated = true; // Update authentication status
-          this.userProfile = response; // Set userProfile with the response data
-
-          // Cache the user profile in localStorage for future use
-          localStorage.setItem('userProfile', JSON.stringify(response));
+        const response = await apiService.signIn({ username: this.username });
+        if (response && response.data) {
+          this.userIsAuthenticated = true;
+          this.userProfile = response.data; // Set user profile
+          localStorage.setItem('userProfile', JSON.stringify(response.data)); // Cache user profile
+          console.log('Logged in:', response); // Log the response
         } else {
-          console.error('Invalid user data received'); // Handle invalid response
+          console.error('Invalid user data received');
         }
       } catch (error) {
-        console.error('Login failed:', error); // Handle login error
+        console.error('Login failed:', error);
       }
     },
-    // Other methods...
-  },
-  created() {
-    // Check if the user is already authenticated on component creation
-    const cachedProfile = localStorage.getItem('userProfile');
-    if (cachedProfile) {
-      try {
-        this.userProfile = JSON.parse(cachedProfile);
-        this.userIsAuthenticated = true;
-      } catch (error) {
-        console.error('Error parsing cached user profile:', error);
-        // Handle the error if parsing fails
+    logout() {
+      this.userIsAuthenticated = false;
+      this.userProfile = null;
+      localStorage.removeItem('userProfile'); // Remove cached profile
+    },
+    loadCachedUserProfile() {
+      const cachedProfile = localStorage.getItem('userProfile');
+      if (cachedProfile) {
+        try {
+          this.userProfile = JSON.parse(cachedProfile); // Set user profile from cached data
+          this.userIsAuthenticated = true;
+        } catch (error) {
+          console.error('Error parsing cached user profile:', error);
+        }
       }
-    }
+    },
+  },
+  mounted() {
+    this.loadCachedUserProfile(); // Load cached user profile when the component is mounted
+    console.log('Cached profile on mount:', this.userProfile); // Log the cached profile when the component is mounted
   },
 };
 </script>
-
 
 <style>
   body, ul {
