@@ -28,18 +28,20 @@
 </template>
 <script>
 import apiService from '../service/apiService.js';
+import Cookies from 'js-cookie';
 
 export default {
   data() {
     return {
       username: '',
       password: '',
+      rememberMe: false,
       errorMessages: [],
     };
   },
-  methods: {  
+  methods: {
     async login() {
-      this.errorMessages = []; // Clear previous error messages
+      this.errorMessages = [];
 
       try {
         const userData = {
@@ -48,17 +50,22 @@ export default {
         };
 
         const response = await apiService.signIn(userData);
-        console.log(response); // Log the response check
-
         if (response.data && response.data.token) {
           localStorage.setItem('authToken', response.data.token);
           const userProfileResponse = await apiService.getCurrentUser();
           if (userProfileResponse && userProfileResponse.data) {
             localStorage.setItem('userProfile', JSON.stringify(userProfileResponse.data));
+            alert('Logged in successfully');
           }
-          alert('เข้าสู่ระบบสำเร็จ');
+
+          if (this.rememberMe) {
+            // Set the SameSite attribute to 'None' and require a secure connection
+            Cookies.set('userData', userData, { expires: 7, sameSite: 'None', secure: true });
+          } else {
+            Cookies.remove('userData');
+          }
+
           this.$router.push('/');
-          // Redirect to the home page when login is successful
         } else {
           if (response.message) {
             this.errorMessages.push(response.message);
@@ -72,6 +79,22 @@ export default {
         }
       }
     },
+    loadUserDataFromCookie() {
+      const userDataFromCookie = Cookies.get('userData');
+      if (userDataFromCookie) {
+        try {
+          const userData = JSON.parse(userDataFromCookie);
+          this.username = userData.username;
+          this.password = userData.password;
+          this.rememberMe = true;
+        } catch (error) {
+          console.error('Error parsing user data from cookie:', error);
+        }
+      }
+    },
+  },
+  mounted() {
+    this.loadUserDataFromCookie();
   },
 };
 </script>

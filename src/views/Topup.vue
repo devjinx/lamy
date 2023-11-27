@@ -21,12 +21,33 @@
         </button>
       </div>
     </section>
+    <div v-if="username" class="user-profile">
+          <p>Logged in as: {{ username }}</p>
+        </div>
   </div>
 </template>
 
 <script>
+import { getCurrentUser } from '../service/apiService.js';
+
 export default {
   name: 'home',
+  data() {
+    return {
+      username: null,
+    };
+  },
+  async created() {
+    try {
+      // Fetch user profile data when the component is created
+      const userProfile = await getCurrentUser();
+      if (userProfile && userProfile.username) {
+        this.username = userProfile.username; // Set the username in the component data
+      }
+    } catch (error) {
+      console.error('Error fetching user profile in component:', error);
+    }
+  },
 };
 </script>
 
@@ -131,5 +152,10 @@ export default {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   cursor: pointer;
+}
+.user-profile {
+  color: #fff; /* Style for the username display */
+  font-size: 18px;
+  margin-top: 10px;
 }
 </style>

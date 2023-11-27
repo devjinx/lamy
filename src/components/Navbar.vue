@@ -45,7 +45,6 @@
     </div>
   </nav>
 </template>
-
 <script>
 import apiService from '../service/apiService.js';
 
@@ -54,49 +53,32 @@ export default {
     return {
       userIsAuthenticated: false,
       userProfile: null,
-      username: '', // Assuming there's an input for the username
     };
   },
   methods: {
-    async login() {
-      try {
-        const response = await apiService.signIn({ username: this.username });
-        if (response && response.data) {
-          this.userIsAuthenticated = true;
-          this.userProfile = response.data; // Set user profile
-          localStorage.setItem('userProfile', JSON.stringify(response.data)); // Cache user profile
-          console.log('Logged in:', response); // Log the response
-        } else {
-          console.error('Invalid user data received');
-        }
-      } catch (error) {
-        console.error('Login failed:', error);
-      }
-    },
-    logout() {
-      this.userIsAuthenticated = false;
-      this.userProfile = null;
-      localStorage.removeItem('userProfile'); // Remove cached profile
-    },
-    loadCachedUserProfile() {
-      const cachedProfile = localStorage.getItem('userProfile');
+    async loadCachedUserProfile() {
+      const cachedProfile = localStorage.getItem('userData');
       if (cachedProfile) {
         try {
-          this.userProfile = JSON.parse(cachedProfile); // Set user profile from cached data
+          this.userProfile = JSON.parse(cachedProfile);
           this.userIsAuthenticated = true;
         } catch (error) {
           console.error('Error parsing cached user profile:', error);
         }
       }
     },
+    logout() {
+      this.userIsAuthenticated = false;
+      this.userProfile = null;
+      localStorage.removeItem('userProfile');
+    },
   },
   mounted() {
-    this.loadCachedUserProfile(); // Load cached user profile when the component is mounted
-    console.log('Cached profile on mount:', this.userProfile); // Log the cached profile when the component is mounted
+    this.loadCachedUserProfile();
+    console.log('Cached profile on mount:', this.userProfile);
   },
 };
 </script>
-
 <style>
   body, ul {
     font-family: 'Kanit', sans-serif;
