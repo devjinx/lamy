@@ -21,9 +21,6 @@
         </button>
       </div>
     </section>
-    <div v-if="username" class="user-profile">
-          <p>Logged in as: {{ username }}</p>
-        </div>
   </div>
 </template>
 

@@ -6,21 +6,29 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <router-link to="/" class="nav-item nav-link">
-            <i class="fas fa-home" style="color: #ffffff;"></i> หน้าหลัก
-          </router-link>
-          <router-link to="/store" class="nav-item nav-link">
-            <i class="fas fa-store" style="color: #ffffff;"></i> ร้านค้า
-          </router-link>
-          <router-link to="/topup" class="nav-item nav-link">
-            <i class="fas fa-wallet" style="color: #ffffff;"></i> เติมเงิน
-          </router-link>
-          <a href="https://web.facebook.com/lamy.pw" class="nav-item nav-link">
-            <i class="fas fa-address-card" style="color: #ffffff;"></i> ติดต่อ
-          </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">
+              <i class="fas fa-home" aria-label="Home"></i> หน้าหลัก
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/store" class="nav-link">
+              <i class="fas fa-store" aria-label="Store"></i> ร้านค้า
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/topup" class="nav-link">
+              <i class="fas fa-wallet" aria-label="Top Up"></i> เติมเงิน
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <a href="https://web.facebook.com/lamy.pw" class="nav-link">
+              <i class="fas fa-address-card" aria-label="Contact"></i> ติดต่อ
+            </a>
+          </li>
         </ul>
-        <div class="navbar-right ml-auto">
+        <div class="navbar-right">
           <template v-if="userIsAuthenticated && userProfile">
             <div class="user-dropdown dropdown">
               <a class="user-username dropdown-toggle" data-bs-toggle="dropdown" role="button">{{ userProfile.username }}</a>
@@ -33,10 +41,10 @@
           <template v-else>
             <div class="nav-links">
               <router-link to="/login" class="nav-item nav-link">
-                <i class="fas fa-right-to-bracket" style="color: #ffffff;"></i> เข้าสู่ระบบ
+                <i class="fas fa-sign-in-alt" aria-label="Login"></i> เข้าสู่ระบบ
               </router-link>
               <router-link to="/register" class="nav-item nav-link">
-                <i class="fas fa-user-plus" style="color: #ffffff;"></i> สมัครสมาชิก
+                <i class="fas fa-user-plus" aria-label="Register"></i> สมัครสมาชิก
               </router-link>
             </div>
           </template>
@@ -45,6 +53,7 @@
     </div>
   </nav>
 </template>
+
 <script>
 import apiService from '../service/apiService.js';
 
@@ -79,6 +88,7 @@ export default {
   },
 };
 </script>
+
 <style>
   body, ul {
     font-family: 'Kanit', sans-serif;
