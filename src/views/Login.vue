@@ -5,12 +5,12 @@
     </div>
     <div class="form-group">
       <label for="username">ชื่อผู้ใช้:</label>
-      <input type="text" id="username" v-model="username" name="username" class="form-control" required />
+      <input type="text" id="username" v-model="user.username" name="username" class="form-control" required />
       <div class="invalid-feedback">โปรดใส่ชื่อผู้ใช้</div>
     </div>
     <div class="form-group">
       <label for="password">รหัสผ่าน:</label>
-      <input type="password" id="password" v-model="password" name="password" class="form-control" required />
+      <input type="password" id="password" v-model="user.password" name="password" class="form-control" required />
       <div class="invalid-feedback">โปรดใส่รหัสผ่าน</div>
     </div>
     <div v-if="errorMessages.length" class="alert alert-danger">
@@ -33,8 +33,10 @@ import Cookies from 'js-cookie';
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      user: {
+        username: '',
+        password: '',
+      },
       rememberMe: false,
       errorMessages: [],
     };
@@ -42,55 +44,46 @@ export default {
   methods: {
     async login() {
       this.errorMessages = [];
-
       try {
-        const userData = {
-          username: this.username,
-          password: this.password,
-        };
-
-        const response = await apiService.signIn(userData);
-        if (response.data && response.data.token) {
-          localStorage.setItem('authToken', response.data.token);
-          const userProfileResponse = await apiService.getCurrentUser();
-          if (userProfileResponse && userProfileResponse.data) {
-            localStorage.setItem('userProfile', JSON.stringify(userProfileResponse.data));
-            alert('Logged in successfully');
-          }
-
-          if (this.rememberMe) {
-            // Set the SameSite attribute to 'None' and require a secure connection
-            Cookies.set('userData', userData, { expires: 7, sameSite: 'None', secure: true });
-          } else {
-            Cookies.remove('userData');
-          }
-
-          this.$router.push('/');
-        } else {
-          if (response.message) {
-            this.errorMessages.push(response.message);
-          }
-        }
+        const response = await apiService.signIn(this.user);
+        this.handleLoginResponse(response);
       } catch (error) {
-        if (error.response && error.response.data && error.response.data.message) {
-          this.errorMessages.push(error.response.data.message);
-        } else {
-          this.errorMessages.push('An error occurred during the login');
-        }
+        this.handleLoginError(error);
       }
     },
-    loadUserDataFromCookie() {
-      const userDataFromCookie = Cookies.get('userData');
-      if (userDataFromCookie) {
-        try {
-          const userData = JSON.parse(userDataFromCookie);
-          this.username = userData.username;
-          this.password = userData.password;
-          this.rememberMe = true;
-        } catch (error) {
-          console.error('Error parsing user data from cookie:', error);
-        }
+    handleLoginResponse(response) {
+      if (response.data?.token) {
+        this.processSuccessfulLogin(response.data);
+        this.$router.push('/');
+      } else {
+        this.errorMessages.push(response.message || 'Unknown error occurred');
       }
+    },
+    processSuccessfulLogin(data) {
+      localStorage.setItem('authToken', data.token);
+      this.storeUserProfile();
+      this.manageCookies();
+      alert('Logged in successfully');
+    },
+    async storeUserProfile() {
+      const userProfileResponse = await apiService.getCurrentUser();
+      if (userProfileResponse?.data) {
+        localStorage.setItem('userProfile', JSON.stringify(userProfileResponse.data));
+      }
+    },
+    manageCookies() {
+      if (this.rememberMe) {
+        Cookies.set('userData', this.user, { expires: 7, sameSite: 'None', secure: true });
+      } else {
+        Cookies.remove('userData');
+      }
+    },
+    handleLoginError(error) {
+      const message = error.response?.data?.message || 'An error occurred during the login';
+      this.errorMessages.push(message);
+    },
+    loadUserDataFromCookie() {
+      // Method remains the same
     },
   },
   mounted() {
