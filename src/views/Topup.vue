@@ -1,5 +1,6 @@
 <template>
-  <div class="homeTop">
+  <Navbar />
+  <div class="Topup">
     <section id="lamyPageTop" class="background-image">
       <div class="contentTop">
         <p></p>
@@ -22,28 +23,18 @@
       </div>
     </section>
   </div>
+  <Footer />
 </template>
 
 <script>
-import { getCurrentUser } from '../service/apiService.js';
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
-  name: 'home',
-  data() {
-    return {
-      username: null,
-    };
-  },
-  async created() {
-    try {
-      // Fetch user profile data when the component is created
-      const userProfile = await getCurrentUser();
-      if (userProfile && userProfile.username) {
-        this.username = userProfile.username; // Set the username in the component data
-      }
-    } catch (error) {
-      console.error('Error fetching user profile in component:', error);
-    }
+  name: 'Topup',
+  components : {
+    Navbar,
+    Footer
   },
 };
 </script>

@@ -26,7 +26,6 @@ const handleAPIError = (error) => {
   }
   throw error;
 };
-
 // Authentication API
 export const signIn = async (userdata) => {
   try {

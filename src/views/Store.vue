@@ -1,5 +1,6 @@
 <template>
-  <div class="homeTop">
+  <Navbar />
+  <div class="Store">
     <section id="lamyPageTop" class="background-image">
       <div class="contentTop">
         <p></p>
@@ -40,11 +41,19 @@
     </div>
     </section>
   </div>
+  <Footer />
 </template>
 
 <script>
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
+
 export default {
-  name: 'home',
+  name: 'Store',
+  components : {
+    Navbar,
+    Footer
+  },
 };
 </script>
 

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Navbar />
     <section id="lamyPage" class="background-image">
       <div class="content">
         <div class="logo-container">
@@ -9,10 +10,10 @@
         </div>
       </div>
     </section>
-  <section id="lamyService">
-    <h1>บริการของเรา</h1>
-    <p>บริการเว็บเช่าที่จะมอบประสบการณ์ใหม่ให้กับคุณ Lamy เป็นบริการย่อยในเครือ AONA</p>
-  </section>
+    <section id="lamyService">
+      <h1>บริการของเรา</h1>
+      <p>บริการเว็บเช่าที่จะมอบประสบการณ์ใหม่ให้กับคุณ Lamy เป็นบริการย่อยในเครือ AONA</p>
+    </section>
     <section id="lamyPortfolio">
       <h1>ผลงานของเรา</h1>
     </section>
@@ -22,12 +23,19 @@
     <section id="lamyTeamDev">
       <h1>ทีมพัฒนา</h1>
     </section>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
+
 export default {
-  name: 'home',
+  components: {
+    Navbar,
+    Footer  
+  }
 };
 </script>
 

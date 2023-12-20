@@ -17,17 +17,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .footer {
-  position: fixed;
+  text-align: center;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 60px;
   line-height: 60px; /* Adjusted line-height to center text vertically */
-  font-size: 14px;
+  font-size: 16px;
   background: linear-gradient(to bottom, #0ea5e9, #65C2F5);
   color: #ffffff;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Kanit', sans-serif;
 }
 </style>

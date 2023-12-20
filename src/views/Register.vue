@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <form class="login-form needs-validation" @submit.prevent="registerUser" novalidate>
     <div class="text-center mb-4">
       <h1 class="h3 mb-3 font-weight-normal">สร้างบัญชี</h1>
@@ -36,12 +37,15 @@
       </button>
     </div>
     <div class="form-group">
-      <router-link to="/login" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">กลับไปที่หน้าเข้าสู่ระบบ</router-link>
+      <router-link to="/login" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">เข้าสู่ระบบ?</router-link>
     </div>
   </form>
+  <Footer />
 </template>
 <script>
 import { signUp } from '../service/apiService.js';
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
   data() {
@@ -53,6 +57,10 @@ export default {
       passwordsMatch: true,
       isLoading: false,
     };
+  },
+  components: {
+    Navbar,
+    Footer  
   },
   methods: {
     validatePasswordMatch() {

@@ -1,5 +1,7 @@
 <template>
-  <form class="login-form needs-validation" @submit.prevent="login" novalidate>
+  <Navbar />
+  <div class="loginForm">
+    <form class="login-form needs-validation" @submit.prevent="login" novalidate>
     <div class="text-center mb-4">
       <h1 class="h3 mb-3 font-weight-normal">เข้าสู่ระบบ</h1>
     </div>
@@ -22,13 +24,20 @@
       <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;">เข้าสู่ระบบ</button>
     </div>
     <div class="form-group">
-      <router-link to="/register" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">สร้างบัญชี</router-link>
+      <router-link to="/register" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">สร้างบัญชี?</router-link>
     </div>
   </form>
+  </div>
+  <Footer />
 </template>
+
 <script>
+
 import apiService from '../service/apiService.js';
 import Cookies from 'js-cookie';
+import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
+
 
 export default {
   data() {
@@ -40,6 +49,10 @@ export default {
       rememberMe: false,
       errorMessages: [],
     };
+  },
+  components:{
+    Navbar,
+    Footer
   },
   methods: {
     async login() {
