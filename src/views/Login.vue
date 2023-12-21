@@ -1,45 +1,51 @@
 <template>
   <Navbar />
+  <div class="main-content">
   <div class="loginForm">
     <form class="login-form needs-validation" @submit.prevent="login" novalidate>
-    <div class="text-center mb-4">
-      <h1 class="h3 mb-3 font-weight-normal">เข้าสู่ระบบ</h1>
-    </div>
-    <div class="form-group">
-      <label for="username">ชื่อผู้ใช้:</label>
-      <input type="text" id="username" v-model="user.username" name="username" class="form-control" required />
-      <div class="invalid-feedback">โปรดใส่ชื่อผู้ใช้</div>
-    </div>
-    <div class="form-group">
-      <label for="password">รหัสผ่าน:</label>
-      <input type="password" id="password" v-model="user.password" name="password" class="form-control" required />
-      <div class="invalid-feedback">โปรดใส่รหัสผ่าน</div>
-    </div>
-    <div v-if="errorMessages.length" class="alert alert-danger">
-      <ul>
-        <li v-for="message in errorMessages" :key="message">{{ message }}</li>
-      </ul>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;">เข้าสู่ระบบ</button>
-    </div>
-    <div class="form-group">
-      <router-link to="/register" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">สร้างบัญชี?</router-link>
-    </div>
-  </form>
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">เข้าสู่ระบบ</h1>
+      </div>
+      <div class="form-group">
+        <label for="username">ชื่อผู้ใช้:</label>
+        <input type="text" id="username" v-model="user.username" name="username" class="form-control" required />
+        <div class="invalid-feedback">โปรดใส่ชื่อผู้ใช้</div>
+      </div>
+      <div class="form-group">
+        <label for="password">รหัสผ่าน:</label>
+        <input type="password" id="password" v-model="user.password" name="password" class="form-control" required />
+        <div class="invalid-feedback">โปรดใส่รหัสผ่าน</div>
+      </div>
+      <div v-if="errorMessages.length" class="alert alert-danger">
+        <ul>
+          <li v-for="message in errorMessages" :key="message">{{ message }}</li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;">เข้าสู่ระบบ</button>
+      </div>
+      <div class="form-group">
+        <router-link to="/register" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">สร้างบัญชี?</router-link>
+      </div>
+    </form>
   </div>
+</div>
   <Footer />
 </template>
 
-<script>
 
+<script>
 import apiService from '../service/apiService.js';
 import Cookies from 'js-cookie';
 import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
 
-
 export default {
+  name: 'LoginPage',
+  components: {
+    Navbar,
+    Footer
+  },
   data() {
     return {
       user: {
@@ -49,10 +55,6 @@ export default {
       rememberMe: false,
       errorMessages: [],
     };
-  },
-  components:{
-    Navbar,
-    Footer
   },
   methods: {
     async login() {
@@ -104,23 +106,27 @@ export default {
   },
 };
 </script>
+
 <style>
 body {
   font-family: 'Kanit', sans-serif;
   background-color: #f2f2f2;
 }
 
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .login-form {
   background-color: white;
   max-width: 400px;
-  margin: 0 auto;
-  padding: 100px;
+  margin: 100px auto; /* Adjust top margin as needed */
+  padding: 40px; /* Adjust padding as needed */
   border-radius: 8px;
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .login-form h1 {
@@ -142,9 +148,6 @@ body {
   text-align: left; 
 }
 
-.error-messages {
-  color: #ff0000;
-}
 @media only screen and (max-width: 600px) {
   .login-form h1 {
     font-size: 20px; 
@@ -160,10 +163,12 @@ body {
   }
   .login-form label {
     font-size: 15px;
-}
-
+  }
   .login-form button, .login-form .btn-secondary {
     font-size: 15px; 
   }
+}
+.main-content {
+  flex: 1;
 }
 </style>
