@@ -1,7 +1,7 @@
 <template>
-      <Navbar />
-  <div class="main-content">
-  <div class="loginForm">
+  <Navbar />
+    <div class="main-content">
+    <div class="loginForm">
     <form class="login-form needs-validation" @submit.prevent="login" novalidate>
       <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">เข้าสู่ระบบ</h1>
@@ -28,149 +28,165 @@
         <router-link to="/register" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">สร้างบัญชี?</router-link>
       </div>
     </form>
-  </div>
-</div>
-<Footer />
+    </div>
+    </div>
+  <Footer />
 
 </template>
 <script>
-import apiService from '../service/apiService.js';
-import Cookies from 'js-cookie';
-import Navbar from '../components/Navbar.vue';
-import Footer from '../components/Footer.vue';
+  import apiService from '../service/apiService.js';
+  import Cookies from 'js-cookie';
+  import Navbar from '../components/Navbar.vue';
+  import Footer from '../components/Footer.vue';
 
-export default {
+  export default {
   name: 'LoginPage',
   components: {
-    Navbar,
-    Footer
+  Navbar,
+  Footer
   },
   data() {
-    return {
-      user: {
-        username: '',
-        password: '',
-      },
-      rememberMe: false,
-      errorMessages: [],
-    };
+  return {
+    user: {
+      username: '',
+      password: '',
+    },
+    rememberMe: false,
+    errorMessages: [],
+  };
   },
   methods: {
-    async login() {
-      this.errorMessages = [];
-      try {
-        const response = await apiService.signIn(this.user);
-        this.handleLoginResponse(response);
-      } catch (error) {
-        this.handleLoginError(error);
-      }
-    },
-    handleLoginResponse(response) {
-      if (response.data?.token) {
-        this.processSuccessfulLogin(response.data);
-        this.$router.push('/');
-      } else {
-        this.errorMessages.push(response.message || 'Unknown error occurred');
-      }
-    },
-    processSuccessfulLogin(data) {
-      localStorage.setItem('authToken', data.token);
-      this.storeUserProfile();
-      this.manageCookies();
-      alert('Logged in successfully');
-    },
-    async storeUserProfile() {
-      const userProfileResponse = await apiService.getCurrentUser();
-      if (userProfileResponse?.data) {
-        localStorage.setItem('userProfile', JSON.stringify(userProfileResponse.data));
-      }
-    },
-    manageCookies() {
-      if (this.rememberMe) {
-        Cookies.set('userData', this.user, { expires: 7, sameSite: 'None', secure: true });
-      } else {
-        Cookies.remove('userData');
-      }
-    },
-    handleLoginError(error) {
-      const message = error.response?.data?.message || 'An error occurred during the login';
-      this.errorMessages.push(message);
-    },
-    loadUserDataFromCookie() {
-      const cookieUserData = Cookies.get('userData');
-      if (cookieUserData) {
-        this.user = JSON.parse(cookieUserData);
-        this.rememberMe = true;
-      }
-    },
+  async login() {
+    this.errorMessages = [];
+    try {
+      const response = await apiService.signIn(this.user);
+      this.handleLoginResponse(response);
+    } catch (error) {
+      this.handleLoginError(error);
+    }
+  },
+  handleLoginResponse(response) {
+    if (response.data?.token) {
+      this.processSuccessfulLogin(response.data);
+      this.$router.push('/');
+    } else {
+      this.errorMessages.push(response.message || 'Unknown error occurred');
+    }
+  },
+  processSuccessfulLogin(data) {
+    localStorage.setItem('authToken', data.token);
+    this.storeUserProfile();
+    this.manageCookies();
+    alert('Logged in successfully');
+  },
+  async storeUserProfile() {
+    const userProfileResponse = await apiService.getCurrentUser();
+    if (userProfileResponse?.data) {
+      localStorage.setItem('userProfile', JSON.stringify(userProfileResponse.data));
+    }
+  },
+  manageCookies() {
+    if (this.rememberMe) {
+      Cookies.set('userData', this.user, { expires: 7, sameSite: 'None', secure: true });
+    } else {
+      Cookies.remove('userData');
+    }
+  },
+  handleLoginError(error) {
+    const message = error.response?.data?.message || 'An error occurred during the login';
+    this.errorMessages.push(message);
+  },
+  loadUserDataFromCookie() {
+    const cookieUserData = Cookies.get('userData');
+    if (cookieUserData) {
+      this.user = JSON.parse(cookieUserData);
+      this.rememberMe = true;
+    }
+  },
   },
   mounted() {
-    this.loadUserDataFromCookie();
+  this.loadUserDataFromCookie();
   },
-};
+  };
 </script>
 <style>
-body {
-  font-family: 'Kanit', sans-serif;
-  background-color: #f2f2f2;
-}
+  body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #f2f2f2;
+  }
 
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(106.6vh - 120px); 
+  }
 
-.login-form {
-  background-color: white;
+  .form-container {
+  width: 100%;
   max-width: 400px;
-  margin: 100px auto; /* Adjust top margin as needed */
-  padding: 40px; /* Adjust padding as needed */
+  padding: 40px;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.1);
-}
+  }
 
-.login-form h1 {
+  .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(106.6vh - 120px); 
+  }
+
+  .login-form {
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-form h1 {
   margin-bottom: 20px;
-}
+  }
 
-.login-form input {
+  .login-form input {
   margin-bottom: 15px;
   text-align: left; 
-}
+  }
 
-.login-form label {
+  .login-form label {
   display: block; 
   text-align: left;
-}
+  }
 
-.login-form button, .login-form .btn-secondary {
+  .login-form button, .login-form .btn-secondary {
   margin-top: 15px;
   text-align: left; 
-}
+  }
 
-@media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 600px) {
   .login-form h1 {
-    font-size: 20px; 
+  font-size: 20px; 
   }
   .login-form input {
-    font-size: 15px;
-    margin-bottom: 10px;
-    padding: 10px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  padding: 10px;
   }
   .login-form {
-    max-width: 90%; 
-    padding: 60px;
+  max-width: 90%; 
+  padding: 60px;
   }
   .login-form label {
-    font-size: 15px;
+  font-size: 15px;
   }
   .login-form button, .login-form .btn-secondary {
-    font-size: 15px; 
+  font-size: 15px; 
   }
-}
-.main-content {
+  }
+  .main-content {
   flex: 1;
-}
+  }
 </style>

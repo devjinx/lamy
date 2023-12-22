@@ -1,36 +1,38 @@
 <template>
   <Navbar />
-  <form class="login-form needs-validation" @submit.prevent="registerUser" novalidate>
-    <div class="text-center mb-4">
-      <h1 class="h3 mb-3 font-weight-normal">สร้างบัญชี</h1>
+    <div class="main-content">
+      <form class="registration-form needs-validation" @submit.prevent="registerUser" novalidate>
+        <div class="text-center mb-4">
+          <h1 class="h3 mb-3 font-weight-normal">สร้างบัญชี</h1>
+        </div>
+        <div class="form-group">
+          <label for="username">ชื่อผู้ใช้:</label>
+          <input type="text" id="username" v-model="username" name="username" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="password">รหัสผ่าน:</label>
+          <input type="password" id="password" v-model="password" name="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
+          <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" class="form-control" required @input="validatePasswordMatch" />
+          <div v-if="!passwordsMatch" class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
+        </div>
+        <div v-if="errorMessages.length" class="alert alert-danger">
+          <ul>
+            <li v-for="message in errorMessages" :key="message">{{ message }}</li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;" :disabled="isLoading">
+            {{ isLoading ? 'กำลังสร้างบัญชี...' : 'สร้างบัญชี' }}
+          </button>
+        </div>
+        <div class="form-group">
+          <router-link to="/login" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">เข้าสู่ระบบ?</router-link>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="username">ชื่อผู้ใช้:</label>
-      <input type="text" id="username" v-model="username" name="username" class="form-control" required />
-    </div>
-    <div class="form-group">
-      <label for="password">รหัสผ่าน:</label>
-      <input type="password" id="password" v-model="password" name="password" class="form-control" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
-    </div>
-    <div class="form-group">
-      <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
-      <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" class="form-control" required @input="validatePasswordMatch" />
-      <div v-if="!passwordsMatch" class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
-    </div>
-    <div v-if="errorMessages.length" class="alert alert-danger">
-      <ul>
-        <li v-for="message in errorMessages" :key="message">{{ message }}</li>
-      </ul>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;" :disabled="isLoading">
-        {{ isLoading ? 'กำลังสร้างบัญชี...' : 'สร้างบัญชี' }}
-      </button>
-    </div>
-    <div class="form-group">
-      <router-link to="/login" class="btn btn-secondary btn-block mt-3" style="background-color: #0ea5e9;">เข้าสู่ระบบ?</router-link>
-    </div>
-  </form>
   <Footer />
 </template>
 
@@ -94,6 +96,13 @@ export default {
 body {
   font-family: 'Kanit', sans-serif;
   background-color: #f2f2f2;
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(106.6vh - 120px); /* Adjust based on the height of Navbar and Footer */
 }
 
 /* Styles for the form container */
