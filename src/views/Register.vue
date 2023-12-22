@@ -14,15 +14,7 @@
     </div>
     <div class="form-group">
       <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
-      <input
-        type="password"
-        id="confirm_password"
-        v-model="confirmPassword"
-        name="confirm_password"
-        class="form-control"
-        required
-        @input="validatePasswordMatch"
-      />
+      <input type="password" id="confirm_password" v-model="confirmPassword" name="confirm_password" class="form-control" required @input="validatePasswordMatch" />
       <div v-if="!passwordsMatch" class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
     </div>
     <div v-if="errorMessages.length" class="alert alert-danger">
@@ -30,7 +22,6 @@
         <li v-for="message in errorMessages" :key="message">{{ message }}</li>
       </ul>
     </div>
-
     <div class="form-group">
       <button type="submit" class="btn btn-primary btn-block" style="background-color: #0ea5e9;" :disabled="isLoading">
         {{ isLoading ? 'กำลังสร้างบัญชี...' : 'สร้างบัญชี' }}
@@ -42,6 +33,7 @@
   </form>
   <Footer />
 </template>
+
 <script>
 import { signUp } from '../service/apiService.js';
 import Navbar from '../components/Navbar.vue';
@@ -83,12 +75,8 @@ export default {
 
       try {
         const response = await signUp(userData);
-        console.log('Registration success:', response.data);
-
-        // Redirect the user to the login page
         this.$router.push('/login');
       } catch (error) {
-        console.error('Registration error:', error);
         if (error.response && error.response.data.errors) {
           this.errorMessages = error.response.data.errors.map((error) => error.msg);
         } else {
@@ -101,65 +89,64 @@ export default {
   },
 };
 </script>
+
 <style>
 body {
   font-family: 'Kanit', sans-serif;
   background-color: #f2f2f2;
 }
 
-.login-form {
+/* Styles for the form container */
+.registration-form {
   background-color: white;
   max-width: 400px;
-  margin: 0 auto;
-  padding: 100px;
-  border-radius: 8px;
-  box-shadow: 0 0 80px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 100px auto; /* Centers the form on the page with margin */
+  padding: 40px; /* Padding inside the form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
-.login-form h1 {
-  margin-bottom: 20px;
+/* Styles for form headers */
+.registration-form h1 {
+  margin-bottom: 20px; /* Space below the header */
 }
 
-.login-form input {
-  margin-bottom: 15px;
-  text-align: left; 
-}
-
-.login-form label {
-  display: block; 
+/* Styles for form inputs */
+.registration-form input {
+  margin-bottom: 15px; /* Space below each input */
   text-align: left;
 }
 
-.login-form button, .login-form .btn-secondary {
-  margin-top: 15px;
+/* Styles for form labels */
+.registration-form label {
+  display: block; 
+  text-align: left; /* Aligns label text to the left */
+}
+
+/* Styles for buttons */
+.registration-form button, .registration-form .btn-secondary {
+  margin-top: 15px; /* Space above the buttons */
   text-align: left; 
 }
 
-.error-messages {
-  color: #ff0000;
-}
+/* Responsive styles for smaller screens */
 @media only screen and (max-width: 600px) {
-  .login-form h1 {
+  .registration-form h1 {
     font-size: 20px; 
   }
-  .login-form input {
+  .registration-form input {
     font-size: 15px;
     margin-bottom: 10px;
     padding: 10px;
   }
-  .login-form {
+  .registration-form {
     max-width: 90%; 
     padding: 60px;
   }
-  .login-form label {
+  .registration-form label {
     font-size: 15px;
-}
-
-  .login-form button, .login-form .btn-secondary {
+  }
+  .registration-form button, .registration-form .btn-secondary {
     font-size: 15px; 
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+      <Navbar />
   <div class="main-content">
   <div class="loginForm">
     <form class="login-form needs-validation" @submit.prevent="login" novalidate>
@@ -30,10 +30,9 @@
     </form>
   </div>
 </div>
-  <Footer />
+<Footer />
+
 </template>
-
-
 <script>
 import apiService from '../service/apiService.js';
 import Cookies from 'js-cookie';
@@ -98,7 +97,11 @@ export default {
       this.errorMessages.push(message);
     },
     loadUserDataFromCookie() {
-      // Method remains the same
+      const cookieUserData = Cookies.get('userData');
+      if (cookieUserData) {
+        this.user = JSON.parse(cookieUserData);
+        this.rememberMe = true;
+      }
     },
   },
   mounted() {
@@ -106,7 +109,6 @@ export default {
   },
 };
 </script>
-
 <style>
 body {
   font-family: 'Kanit', sans-serif;
