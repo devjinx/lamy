@@ -102,7 +102,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(106.6vh - 120px); /* Adjust based on the height of Navbar and Footer */
+  min-height: calc(107vh - 120px); /* Adjust based on the height of Navbar and Footer */
 }
 
 /* Styles for the form container */

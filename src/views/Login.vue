@@ -119,7 +119,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(106.6vh - 120px); 
+    min-height: calc(107vh - 120px); 
   }
 
   .form-container {
