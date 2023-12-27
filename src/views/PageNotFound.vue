@@ -1,11 +1,12 @@
 <template>
-  <Navbar />
-  <div class="centered-content">
-    <h1>404 - Page Not Found</h1>
-    <p>The page you are looking for does not exist.</p>
+  <div class="main-container">
+    <Navbar />
+    <div class="centered-content">
+      <h1>404 - Page Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+    </div>
+    <Footer />
   </div>
-  <Footer />
-
 </template>
 
 <script>
@@ -21,13 +22,18 @@ export default {
 </script>
 
 <style>
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   .centered-content {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    justify-content: center; 
-    height: 55vh; 
     text-align: center; 
-    padding-top: 50px; 
+    flex-grow: 1;
+    padding-top: 120px;
   }
 </style>

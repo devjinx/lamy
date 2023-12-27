@@ -5,7 +5,7 @@ import Login from '../views/Login.vue';
 import Store from '../views/Store.vue';
 import Topup from '../views/Topup.vue';
 import PageNotFound from '../views/PageNotFound.vue';
-import Dashboard from '../views/dashboard.vue';
+import Dashboard from '../views/Dashboard.vue';
 
 const routes = [
   {

@@ -31,7 +31,7 @@
     top: 0;
     width: 200px; /* Adjust as needed */
     height: 100%;
-    background-color: #333;
+    background-color: #999;
     padding: 20px;
   }
   
@@ -41,14 +41,15 @@
   }
   
   .Menu ul li a {
-    color: white;
+    color: black;
     text-decoration: none;
+    text-align: center;
     display: block;
     padding: 10px 0;
   }
   
   .Menu ul li a:hover {
-    background-color: #555;
+    background-color:whitesmoke;
   }
   </style>
   
