@@ -14,24 +14,34 @@
         <li><router-link to="/Dashboard/">ปรับบทบาทของผู้ใช้</router-link></li>
         <li><router-link to="/Dashboard/">ประวัติการเติมเงิน</router-link></li>
         <li><router-link to="/Dashboard/">ประวัติการสั่งซื้อสินค้า</router-link></li>
+        <li><router-link to="/" @click="logout">ลงชื่อออก</router-link></li>
       </ul>
     </div>
   </template>
   
   <script>
+  import apiService from '../service/apiService';
   export default {
     name: "Menu",
+    methods: {
+      logout() {
+        console.log("User logged out");
+      },
+    },
   };
-</script>
+  </script>
   
-  <style scoped>
+  <style>
+  body{
+    background-color: #D7DBDD;
+  }
   .Menu {
     position: fixed;
     left: 0;
     top: 0;
-    width: 200px; /* Adjust as needed */
+    width: 200px; 
     height: 100%;
-    background-color: #999;
+    background-color: #F8F9F9;
     padding: 20px;
   }
   
