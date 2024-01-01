@@ -1,7 +1,9 @@
 <template>
   <div class="Dashboard">
     <Menu />
-      <h1>Settings</h1>
+    <div class="content">
+      <h1>Welcome to the Settings Dashboard</h1>
+    </div>
     <Footer />
   </div>
 </template>
@@ -18,11 +20,21 @@ export default {
   }
 };
 </script>
+
 <style>
-h1{
+h1 {
   text-align: center;
+  color: black; 
 }
-.Dashboard{
-  padding-top: 100px; 
+
+.Dashboard {
+  padding-top: 100px;
+}
+
+.content {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%;
 }
 </style>

@@ -41,18 +41,16 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
-    children: [
-      {
-        path: 'settings',
-        name: 'dashboard-settings',
-        component: DashboardSettings,
-      },
-      {
-        path: 'historytopup',
-        name: 'dashboard-history-topup',
-        component: DashboardHistoryTopup,
-      },
-    ]
+  },
+  {
+    path: '/dashboard/settings',
+    name: 'DashboardSettings',
+    component: DashboardSettings,
+  },
+  {
+    path: '/dashboard/historytopup',
+    name: 'DashboardHistoryTopup',
+    component: DashboardHistoryTopup,
   },
   {
     path: '/:pathMatch(.*)*',

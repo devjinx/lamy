@@ -2,6 +2,7 @@
     <div class="Menu">
       <ul>
         <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/Dashboard">สรุปทั้งหมด</router-link></li>
         <li><router-link to="/Dashboard/Settings">ตั้งค่าเว็บไซต์</router-link></li>
         <li><router-link to="/Dashboard/">ตั้งค่าข้อความและรูปภาพต่างๆ</router-link></li>
         <li><router-link to="/Dashboard/">ตั้งค่าช่องทางการรับเงิน</router-link></li>

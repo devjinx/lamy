@@ -2,7 +2,7 @@
   <div class="Dashboard">
     <Menu />
     <div class="content">
-      <h1>Dashboard Title</h1>
+      <h1>Welcome to the Settings Dashboard</h1>
     </div>
     <Footer />
   </div>
@@ -24,7 +24,7 @@ export default {
 <style>
 h1 {
   text-align: center;
-  color: black; /* Ensure the text is visible */
+  color: black; 
 }
 
 .Dashboard {
@@ -32,9 +32,9 @@ h1 {
 }
 
 .content {
-  display: flex; /* Flexbox layout for the content */
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
-  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%;
 }
 </style>

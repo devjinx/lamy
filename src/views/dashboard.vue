@@ -13,12 +13,13 @@ export default {
   name: 'Dashboard',
   components: {
     Menu,
-    Footer
+    Footer,
   }
 };
 </script>
+
 <style>
-.Dashboard{
+.Dashboard {
   padding-top: 100px; 
 }
 </style>
