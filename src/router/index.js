@@ -6,6 +6,8 @@ import Store from '../views/Store.vue';
 import Topup from '../views/Topup.vue';
 import PageNotFound from '../views/PageNotFound.vue';
 import Dashboard from '../views/Dashboard.vue';
+import DashboardSettings from '../views/Dashboard/Settings.vue';
+import DashboardHistoryTopup from '../views/Dashboard/HistoryTopUp.vue';
 
 const routes = [
   {
@@ -39,6 +41,18 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
+    children: [
+      {
+        path: 'settings',
+        name: 'dashboard-settings',
+        component: DashboardSettings,
+      },
+      {
+        path: 'historytopup',
+        name: 'dashboard-history-topup',
+        component: DashboardHistoryTopup,
+      },
+    ]
   },
   {
     path: '/:pathMatch(.*)*',
