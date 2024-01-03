@@ -1,66 +1,83 @@
 <template>
-    <div class="Menu">
-      <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/Dashboard">สรุปทั้งหมด</router-link></li>
-        <li><router-link to="/Dashboard/Settings">ตั้งค่าเว็บไซต์</router-link></li>
-        <li><router-link to="/Dashboard/">ตั้งค่าข้อความและรูปภาพต่างๆ</router-link></li>
-        <li><router-link to="/Dashboard/">ตั้งค่าช่องทางการรับเงิน</router-link></li>
-        <li><router-link to="/Dashboard/">จัดการหมวดหมู่สินค้า</router-link></li>
-        <li><router-link to="/Dashboard/">จัดการสินค้า</router-link></li>
-        <li><router-link to="/Dashboard/">จัดการสต็อกสินค้า</router-link></li>
-        <li><router-link to="/Dashboard/">จัดการคิว ID-Pass</router-link></li>
-        <li><router-link to="/Dashboard/">จัดการผู้ใช้</router-link></li>
-        <li><router-link to="/Dashboard/">ปรับจำนวนเครดิตของผู้ใช้</router-link></li>
-        <li><router-link to="/Dashboard/">ปรับบทบาทของผู้ใช้</router-link></li>
-        <li><router-link to="/Dashboard/">ประวัติการเติมเงิน</router-link></li>
-        <li><router-link to="/Dashboard/">ประวัติการสั่งซื้อสินค้า</router-link></li>
-        <li><router-link to="/" @click="logout">ลงชื่อออก</router-link></li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
-  import apiService from '../service/apiService';
-  export default {
-    name: "Menu",
-    methods: {
-      logout() {
-        console.log("User logged out");
-      },
+  <div class="Menu">
+    <ul>
+      <li class="active"><router-link to="/dashboard">Dashboard</router-link></li>
+      <li><router-link to="/dashboard/settings">ตั้งค่าเว็บไซต์</router-link></li>
+      <li><router-link to="/Order">จัดการหมวดหมู่สินค้า </router-link></li>
+      <li><router-link to="/Products">ปรับจำนวนเครดิตของผู้ใช้ </router-link></li>
+      <li><router-link to="/SalesReport">ปรับบทบาทของผู้ใช้</router-link></li>
+      <li><router-link to="/dashboard/historytopup">ประวัติการเติมเงิน</router-link></li>
+      <li><router-link to="/Settings">ประวัติการสั่งซื้อสินค้า </router-link></li>
+      <li><router-link to="/" @click="logout">Sign Out</router-link></li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Menu",
+  methods: {
+    logout() {
+      // Logout logic here
+      console.log("User logged out");
     },
-  };
-  </script>
-  
-  <style>
-  body{
-    background-color: #D7DBDD;
-  }
-  .Menu {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 200px; 
-    height: 100%;
-    background-color: #F8F9F9;
-    padding: 20px;
-  }
-  
-  .Menu ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .Menu ul li a {
-    color: black;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    padding: 10px 0;
-  }
-  
-  .Menu ul li a:hover {
-    background-color:whitesmoke;
-  }
-  </style>
-  
+  },
+};
+</script>
+
+<style>
+body {
+  background-color: #D7DBDD;
+}
+.Menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px; /* Adjusted width */
+  height: 100%;
+  background-color: #FFFFFF; /* Changed to white background */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Added shadow for depth */
+}
+
+.Menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.Menu ul li {
+  margin-bottom: 10px;
+}
+
+.Menu ul li a {
+  color: #333; /* Changed to a darker font color */
+  text-decoration: none;
+  text-align: left;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 5px; /* Added rounded corners */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.Menu ul li.active a,
+.Menu ul li a:hover {
+  background-color: #3498db; /* Blue background for active/hover */
+  color: #fff; /* White text for active/hover */
+}
+
+.pro-section {
+  margin-top: 30px; /* Added space before the pro section */
+}
+
+.pro-card {
+  background-color: #3498db; /* Blue background */
+  padding: 15px;
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+}
+
+.pro-badge {
+  color: #fff; /* White text */
+  font-weight: bold;
+}
+</style>

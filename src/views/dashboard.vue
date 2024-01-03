@@ -23,3 +23,4 @@ export default {
   padding-top: 100px; 
 }
 </style>
+``
