@@ -1,13 +1,14 @@
 <template>
   <div class="Menu">
     <ul>
-      <li class="active"><router-link to="/dashboard">Dashboard</router-link></li>
-      <li><router-link to="/dashboard/settings">ตั้งค่าเว็บไซต์</router-link></li>
-      <li><router-link to="/Order">จัดการหมวดหมู่สินค้า </router-link></li>
-      <li><router-link to="/Products">ปรับจำนวนเครดิตของผู้ใช้ </router-link></li>
-      <li><router-link to="/SalesReport">ปรับบทบาทของผู้ใช้</router-link></li>
-      <li><router-link to="/dashboard/historytopup">ประวัติการเติมเงิน</router-link></li>
-      <li><router-link to="/Settings">ประวัติการสั่งซื้อสินค้า </router-link></li>
+      <li><router-link to="/" class="lamy-link"><img src="../../public/Lamy_logo_png.png" width="32" height="32" class="lamy-logo"> Lamy</router-link></li>
+      <li :class="{ active: currentRoute === '/dashboard' }"><router-link to="/dashboard">Dashboard</router-link></li>
+      <li :class="{ active: currentRoute === '/dashboard/settings' }"><router-link to="/dashboard/settings">ตั้งค่าเว็บไซต์</router-link></li>
+      <li :class="{ active: currentRoute === '/Order' }"><router-link to="/Order">จัดการหมวดหมู่สินค้า </router-link></li>
+      <li :class="{ active: currentRoute === '/Products' }"><router-link to="/Products">ปรับจำนวนเครดิตของผู้ใช้ </router-link></li>
+      <li :class="{ active: currentRoute === '/SalesReport' }"><router-link to="/SalesReport">ปรับบทบาทของผู้ใช้</router-link></li>
+      <li :class="{ active: currentRoute === '/dashboard/historytopup' }"><router-link to="/dashboard/historytopup">ประวัติการเติมเงิน</router-link></li>
+      <li :class="{ active: currentRoute === '/Settings' }"><router-link to="/Settings">ประวัติการสั่งซื้อสินค้า </router-link></li>
       <li><router-link to="/" @click="logout">Sign Out</router-link></li>
     </ul>
   </div>
@@ -16,9 +17,13 @@
 <script>
 export default {
   name: "Menu",
+  data() {
+    return {
+      currentRoute: this.$route.path,
+    };
+  },
   methods: {
     logout() {
-      // Logout logic here
       console.log("User logged out");
     },
   },
@@ -27,7 +32,7 @@ export default {
 
 <style>
 body {
-  background-color: #D7DBDD;
+  background-color: #fff;
 }
 .Menu {
   position: fixed;
@@ -35,7 +40,7 @@ body {
   top: 0;
   width: 250px; /* Adjusted width */
   height: 100%;
-  background-color: #FFFFFF; /* Changed to white background */
+  background-color: #D7DBDD; /* Changed to white background */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Added shadow for depth */
 }
@@ -53,16 +58,31 @@ body {
   color: #333; /* Changed to a darker font color */
   text-decoration: none;
   text-align: left;
+  font-size: 16px;
   display: block;
   padding: 10px 15px;
   border-radius: 5px; /* Added rounded corners */
   transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-.Menu ul li.active a,
 .Menu ul li a:hover {
   background-color: #3498db; /* Blue background for active/hover */
   color: #fff; /* White text for active/hover */
+}
+
+.Menu ul li.active a {
+  background-color: #3498db; /* Blue background for active item */
+  color: #fff; /* White text for active item */
+}
+
+.Menu ul li .lamy-link {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.Menu ul li .lamy-link .lamy-logo {
+  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
 .pro-section {
