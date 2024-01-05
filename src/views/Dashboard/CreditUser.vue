@@ -8,9 +8,9 @@
     </div>
   </template>
   
-  <script>
-  import Menu from '../../components/Menu.vue';
-  import Footer from '../../components/Footer.vue';
+<script>
+import Menu from '@/components/Menu.vue';
+import Footer from '@/components/Footer.vue';
   
   export default {
     name: 'Dashboard',
@@ -19,9 +19,9 @@
       Footer
     }
   };
-  </script>
+</script>
   
-  <style>
+<style>
   h1 {
     text-align: center;
     color: black; 
@@ -37,4 +37,4 @@
     align-items: center; 
     height: 100%;
   }
-  </style>
+</style>
