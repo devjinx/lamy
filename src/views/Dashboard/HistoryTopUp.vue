@@ -2,7 +2,7 @@
   <div class="Dashboard">
     <Menu />
     <div class="content">
-      <h1>Welcome to the historytopup Dashboard</h1>
+      <h1>Welcome to the Dashboard</h1>
     </div>
     <Footer />
   </div>
