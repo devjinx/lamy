@@ -10,7 +10,7 @@ import DashboardSettings from '../views/Dashboard/Settings.vue';
 import DashboardHistoryTopup from '../views/Dashboard/HistoryTopUp.vue';
 import DashboardHistoryBuy from '../views/Dashboard/HistoryBuy.vue';
 import DashboardCreditUser from '../views/Dashboard/CreditUser.vue';
-import DashboardProductCategories from '../views/Dashboard/ProductCategories.vue';
+import DashboardCategories from '../views/Dashboard/Categories.vue';
 import DashboardRuleUser from '../views/Dashboard/RuleUser.vue';
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -23,7 +23,7 @@ const routes = [
   { path: '/dashboard/historytopup', name: 'DashboardHistoryTopup', component: DashboardHistoryTopup },
   { path: '/dashboard/historybuy', name: 'DashboardHistoryBuy', component: DashboardHistoryBuy },
   { path: '/dashboard/credituser', name: 'DashboardCreditUser', component: DashboardCreditUser },
-  { path: '/dashboard/productcategories', name: 'DashboardProductCategories', component: DashboardProductCategories },
+  { path: '/dashboard/categories', name: 'DashboardCategories', component: DashboardCategories },
   { path: '/dashboard/ruleuser', name: 'DashboardRuleUser', component: DashboardRuleUser },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: PageNotFound }
 ];
